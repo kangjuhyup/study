@@ -7,6 +7,7 @@
 | 폴더 | 내용 |
 | --- | --- |
 | [oom-snapshot](./oom-snapshot/README.md) | Node.js OOM 재현, Heap Snapshot 비교와 메모리 참조 분석 |
+| [k6-loadgen-isolation](./k6-loadgen-isolation/README.md) | 공유 자원의 부하 생성기 OOM과 M1 Mini 분리 시험 해석 |
 
 ## 기록 방식
 

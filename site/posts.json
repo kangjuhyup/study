@@ -6,5 +6,13 @@
     "description": "작은 객체 56개가 약 29.4MB를 붙잡는 이유. OOM을 재현하고 Comparison, Retained Size, Retainers로 참조 경로를 추적한 기록입니다.",
     "publishedAt": "2026-09-06",
     "draft": false
+  },
+  {
+    "slug": "k6-loadgen-isolation",
+    "source": "k6-loadgen-isolation/blog/index.md",
+    "title": "서버의 한계인 줄 알았는데 k6가 먼저 죽었다",
+    "description": "k6도 병목이 될 수 있다. 부하 발생 환경을 분리한 이유와 300 VU 30분 측정 결과를 정리합니다.",
+    "publishedAt": null,
+    "draft": true
   }
 ]
