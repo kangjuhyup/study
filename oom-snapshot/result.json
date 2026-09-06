@@ -1,0 +1,23 @@
+{
+  "directory": "/Users/kangjuhyup/orca/workspaces/auth/\uc2a4\ud2b8\ub808\uc2a4\ud14c\uc2a4\ud2b8/load-tests/diagnostics/oom-lab-pu1mpk5c",
+  "returncode": -6,
+  "oom_confirmed": true,
+  "files": [
+    {
+      "name": "reproduce.cjs",
+      "bytes": 437
+    },
+    {
+      "name": "baseline.heapsnapshot",
+      "bytes": 4567820
+    },
+    {
+      "name": "oom.log",
+      "bytes": 14911
+    },
+    {
+      "name": "Heap.20260906.094454.38528.0.001.heapsnapshot",
+      "bytes": 4177232
+    }
+  ]
+}

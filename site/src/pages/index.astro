@@ -1,0 +1,25 @@
+---
+import Page from '../layouts/Page.astro';
+import { loadBlog } from '../lib/blog.mjs';
+import { site } from '../lib/settings.mjs';
+const { posts } = await loadBlog();
+---
+<Page>
+  <section class="intro">
+    <p class="eyebrow">LEARNING NOTES</p>
+    <h1>배운 것을,<br />이해한 만큼 기록합니다.</h1>
+    <p>{site.description}</p>
+  </section>
+  <section aria-labelledby="posts-heading" class="post-list">
+    <div class="section-label"><h2 id="posts-heading">학습 기록</h2><span>{String(posts.length).padStart(2, '0')}</span></div>
+    {posts.length === 0 ? <p class="empty">첫 번째 기록을 준비하고 있습니다.</p> : posts.map(post => (
+      <article class="post-summary">
+        <div class="post-date">{post.draft ? <span class="draft-label">초안</span> : <time datetime={post.publishedAt}>{post.publishedAt}</time>}</div>
+        <div>
+          <h3><a href={post.path}>{post.title}<span aria-hidden="true" class="arrow"> ↗</span></a></h3>
+          <p>{post.description}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+</Page>

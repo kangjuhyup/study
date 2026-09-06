@@ -1,0 +1,32 @@
+---
+import { site, pagePath, absoluteURL, isPreview } from '../lib/settings.mjs';
+import '../styles/global.css';
+const { title = site.title, description = site.description, path = pagePath(), article = false } = Astro.props;
+const preview = isPreview();
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === site.title ? `${site.title} · ${site.author}` : `${title} · ${site.title}`}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.author} />
+    {preview ? <meta name="robots" content="noindex, nofollow" /> : <link rel="canonical" href={absoluteURL(path)} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:locale" content="ko_KR" />
+    {!preview && <meta property="og:url" content={absoluteURL(path)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <header class="site-header">
+      <a class="wordmark" href={pagePath()} aria-label="Study 홈">Study<span aria-hidden="true">.</span></a>
+      <a class="author" href="https://github.com/kangjuhyup">{site.author} ↗</a>
+    </header>
+    {preview && <div class="preview-banner">로컬 미리보기 · 아직 공개하지 않은 글이 포함되어 있습니다.</div>}
+    <main id="main"><slot /></main>
+    <footer class="site-footer"><span>Study · {site.author}</span><a href="https://github.com/kangjuhyup/study">학습 저장소 ↗</a></footer>
+  </body>
+</html>

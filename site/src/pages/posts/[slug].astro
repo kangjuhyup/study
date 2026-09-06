@@ -1,0 +1,26 @@
+---
+import Page from '../../layouts/Page.astro';
+import { loadBlog } from '../../lib/blog.mjs';
+import { site, pagePath } from '../../lib/settings.mjs';
+export async function getStaticPaths() {
+  const { posts } = await loadBlog();
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+---
+<Page title={post.title} description={post.description} path={post.path} article>
+  <article class="article">
+    <header class="article-header">
+      <a class="back-link" href={pagePath()}>← 학습 기록</a>
+      <p class="eyebrow">{post.draft ? 'DRAFT · 초안' : 'LEARNING NOTES'}</p>
+      <h1>{post.title}</h1>
+      <p class="article-meta"><span>{site.author}</span>{post.publishedAt && <time datetime={post.publishedAt}>{post.publishedAt}</time>}</p>
+    </header>
+    {post.headings.length > 0 && <nav class="toc" aria-label="목차">
+      <h2>이 글에서</h2>
+      <ol>{post.headings.filter(heading => heading.level === 2).map(heading => <li><a href={`#${heading.id}`}>{heading.text}</a></li>)}</ol>
+    </nav>}
+    <div class="prose" set:html={post.html} />
+    <a class="back-link article-end" href={pagePath()}>← 다른 학습 기록 보기</a>
+  </article>
+</Page>

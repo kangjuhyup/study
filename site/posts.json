@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "nodejs-oom-heap-snapshot",
+    "source": "oom-snapshot/blog/index.md",
+    "title": "Node.js OOM을 직접 재현하고, Heap Snapshot으로 원인을 찾기",
+    "description": "작은 객체 56개가 약 29.4MB를 붙잡는 이유. OOM을 재현하고 Comparison, Retained Size, Retainers로 참조 경로를 추적한 기록입니다.",
+    "publishedAt": null,
+    "draft": true
+  }
+]

@@ -1,0 +1,4 @@
+*.heapsnapshot
+*.log
+/results/
+.DS_Store
