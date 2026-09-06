@@ -40,7 +40,7 @@ npm run preview:review
 | `npm run build:preview` | 초안 포함 검토 결과를 `dist-preview/`에 생성 |
 | `npm run preview:review` | `dist-preview/`를 로컬에서 확인 |
 
-검토 모드는 검색 제외 메타데이터를 제공합니다. `dist-preview/`는 로컬 검토용이며 배포하지 않습니다. 첫 OOM 글은 `draft: true`, `publishedAt: null`이므로 처음 공개 빌드에는 해당 글과 이미지가 없습니다.
+검토 모드는 검색 제외 메타데이터를 제공합니다. `dist-preview/`는 로컬 검토용이며 배포하지 않습니다. OOM 글은 2026-09-06에 공개 대상으로 전환했습니다. `draft: true`인 글과 그 글만 사용하는 이미지는 공개 빌드에서 제외됩니다.
 
 ## 글 추가와 수정
 
