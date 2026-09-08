@@ -1,18 +1,20 @@
 # import type도 계층 경계를 넘는다: TypeScript 경계 테스트 만들기
 
-기능 테스트와 빌드가 통과해도 계층 규칙은 깨질 수 있다. 다음 코드는 런타임에는 남지 않지만 Presentation을 Application 타입에 결합한다.
+알림 템플릿을 내려 주는 작은 API를 만든다고 해 보자. Application 계층에는 이미 필요한 값을 담은 `ReminderTemplateView`가 있다. Presentation DTO도 같은 세 필드가 필요하다. 그렇다면 이 타입을 그대로 가져다 쓰는 것이 가장 간단해 보인다.
 
 ```typescript
 import type { ReminderTemplateView } from '../../../application/query/dto/response/reminder-template.view';
 ```
 
-이 글에서는 가상의 `campaign` 모듈로 위반을 재현하고, 경계 테스트를 만든 뒤 transport-local 타입으로 수정한다.
+실행되는 JavaScript에는 이 import가 남지 않는다. 빌드와 기능 테스트도 문제없이 통과할 수 있다. 그런데 계층 사이에는 분명 새로운 연결이 생겼다.
+
+이 글에서는 가상의 `campaign` 모듈에 이 연결을 만들고, 경계 테스트로 찾아낸 뒤 transport-local 타입으로 끊어 본다.
 
 > 아래 도메인과 코드는 계층 경계 테스트를 설명하기 위한 최소 예제다.
 
-## import type도 결합이다
+## 실행할 때 사라지는 코드가 왜 문제일까
 
-위반한 Presentation DTO는 Application view를 생성자 타입으로 사용한다.
+위반한 DTO의 전체 모습은 다음과 같다.
 
 ```typescript
 import type { ReminderTemplateView } from '../../../application/query/dto/response/reminder-template.view';
@@ -34,30 +36,22 @@ export class GetReminderTemplateResponseDto {
 }
 ```
 
-TypeScript는 `import type`을 JavaScript 출력에서 제거한다. 하지만 컴파일에는 Application 선언이 필요하고, 그 타입의 이름·위치·필드가 바뀌면 Presentation도 영향을 받는다. 런타임 의존성이 없다는 사실과 소스 계층이 독립적이라는 판단은 별개다.
+`import type`은 런타임 의존성을 만들지 않는다. 하지만 이 파일을 컴파일하려면 Application의 선언이 필요하다. 타입의 이름이나 위치가 바뀌면 DTO도 고쳐야 하고, Application view의 모양이 Presentation의 입력 계약을 결정한다. 런타임에서 사라진다고 설계 의존성까지 사라지는 것은 아니다.
 
-이 글에서 검증할 정책은 다음 한 문장이다.
+한 파일만 보면 대수롭지 않다. 같은 선택이 여러 DTO에 반복되면 이야기가 달라진다. Application 내부 모델을 정리했을 뿐인데 API 계층 파일이 함께 바뀌고, 내부에는 필요하지만 외부에는 공개하면 안 되는 필드를 추가하기도 어려워진다. ORM이나 외부 SDK 타입까지 재사용하기 시작하면 저장 방식의 세부사항이 전송 계약으로 새어 나올 수 있다.
+
+나중에 경계를 되살리려면 퍼져 있는 타입을 나누고 매핑을 추가하며 호출부를 한꺼번에 고쳐야 한다. 계층 침식은 기능을 즉시 깨뜨리지 않기 때문에 이렇게 쌓이기 쉽다.
+
+그래서 이 예제에서는 한 가지 규칙을 정한다.
 
 > Presentation DTO는 Application·Domain·Infrastructure 타입을 직접 참조하지 않는 transport-local 스키마여야 한다.
 
-이 정책 없이 결합을 허용하면 작은 편의가 다음 비용으로 누적될 수 있다.
+## 실패하는 장면부터 재현해 보기
 
-| 상황 | 결과 |
-| --- | --- |
-| Application 타입을 여러 DTO가 공유 | 내부 리팩터링이 API 계층까지 연쇄 전파된다. |
-| 내부 모델과 응답 모델을 같은 타입으로 사용 | 두 계약을 서로 다른 속도로 변경하거나 API 버전을 유지하기 어려워진다. |
-| ORM·외부 SDK 타입까지 재사용 | 저장 방식과 외부 서비스의 세부사항이 전송 계약으로 새어 나간다. |
-| 결합이 퍼진 뒤 경계를 복원 | 타입 분리, 매핑 추가와 호출부 수정을 한꺼번에 해야 한다. |
-
-계층 침식은 즉시 기능 장애를 만들지 않아 발견이 늦다. 경계 테스트는 첫 번째 금지 import가 추가될 때 실패해 확산을 막는다.
-
-## 실패와 수정을 재현한다
-
-재현 자료는 위반 상태와 수정 상태를 fixture로 분리하고, 계층 테스트는 `test/architecture`에 둔다.
+위반 전후를 반복해서 볼 수 있도록 두 fixture를 나란히 뒀다. 별도의 서버 프로젝트를 복제하지 않고 테스트에 필요한 파일만 남겼다.
 
 ```text
 layer-boundary-test/
-├─ .nvmrc
 ├─ fixtures/
 │  ├─ violation/modules/campaign/...
 │  └─ fixed/modules/campaign/...
@@ -71,10 +65,9 @@ cd layer-boundary-test
 nvm use
 
 npm run test:violation
-npm run test:fixed
 ```
 
-첫 명령은 `import type`이 있는 fixture를 검사한다. 종료 코드 1과 위반 파일이 출력된다.
+위반 fixture를 검사하면 테스트가 실패하고 문제의 DTO가 그대로 나타난다.
 
 ```text
 ✖ keeps presentation DTOs as transport-local schemas
@@ -89,7 +82,11 @@ pass 0
 fail 1
 ```
 
-두 번째 명령은 수정 fixture를 검사하고 종료 코드 0으로 끝난다.
+이 실패가 재현의 성공이다. 수정된 fixture는 같은 테스트를 통과한다.
+
+```bash
+npm run test:fixed
+```
 
 ```text
 ✔ keeps presentation DTOs as transport-local schemas
@@ -98,17 +95,9 @@ pass 1
 fail 0
 ```
 
-## 경계 테스트 만들기
+## 경계 테스트는 의외로 단순하다
 
-검사는 다음 순서로 진행한다.
-
-1. `modules` 아래의 TypeScript 파일을 재귀 수집한다.
-2. `presentation/dto` 아래의 `.dto.ts`만 남긴다.
-3. `from` 뒤의 상대 import를 추출한다.
-4. DTO 위치를 기준으로 import 대상을 해석한다.
-5. 대상 경로에 `application`, `domain`, `infrastructure`가 있으면 `offenders`에 추가하고 빈 배열인지 확인한다.
-
-`test/architecture/layer-boundary.spec.ts`의 전체 코드는 다음과 같다.
+검사는 `modules` 아래의 TypeScript 파일을 모으는 데서 시작한다. 그중 `presentation/dto`의 `.dto.ts`만 남기고, 상대 import가 Application·Domain·Infrastructure를 향하는지 확인한다. 발견한 파일을 `offenders`에 모아 빈 배열과 비교하면 끝이다.
 
 [GitHub에서 실제 테스트 코드 보기](https://github.com/kangjuhyup/study/blob/main/layer-boundary-test/test/architecture/layer-boundary.spec.ts)
 
@@ -160,11 +149,11 @@ test('keeps presentation DTOs as transport-local schemas', () => {
 });
 ```
 
-정규식이 `from` 절을 찾기 때문에 `import type`도 예외 없이 검사된다. 상대 경로는 `resolve(dirname(file), specifier)`로 해석하므로 `../../../application/...`이 실제로 어느 계층을 가리키는지도 판단할 수 있다.
+정규식은 `from` 절을 찾기 때문에 `import type`도 따로 예외 처리할 필요가 없다. `resolve(dirname(file), specifier)`는 `../../../application/...` 같은 상대 경로가 실제로 향하는 위치를 계산한다. 단순히 소스에서 `application`이라는 단어만 찾는 것보다 오탐이 적고, 실패했을 때 어느 DTO를 고쳐야 하는지도 알 수 있다.
 
-## transport-local 타입으로 수정한다
+## 타입을 DTO 가까이 돌려놓기
 
-Application import를 제거하고 DTO가 필요한 입력 모양만 같은 파일에 선언한다.
+해결은 Application import를 지우고 DTO가 실제로 요구하는 모양을 같은 파일에 선언하는 것이다.
 
 ```typescript
 type ReminderTemplateSource = {
@@ -190,20 +179,14 @@ export class GetReminderTemplateResponseDto {
 }
 ```
 
-`ReminderTemplateSource`는 `code`, `content`, `buttonLabel`만 표현한다. TypeScript의 구조적 타이핑 덕분에 같은 모양의 Application 값은 그대로 받을 수 있다. 런타임 변환을 추가하지 않고 타입의 소유권만 Presentation으로 옮긴다.
+`ReminderTemplateSource`는 `code`, `content`, `buttonLabel`만 안다. 특정 Application 타입의 이름과 위치는 모른다. TypeScript의 구조적 타이핑 덕분에 같은 모양의 값은 그대로 받을 수 있으므로 런타임 변환도 추가되지 않는다.
 
-## 경계 테스트의 트레이드오프
+## 결국 무엇과 무엇을 맞바꾸는가
 
-이 테스트는 결합을 없애는 대신 다른 비용을 선택한다.
+첫 번째 교환은 **중복과 독립성**이다. transport-local 타입을 만들면 비슷한 필드 선언이 하나 더 생긴다. 양쪽 계약이 함께 바뀌는 날에는 타입과 매핑 지점도 각각 고쳐야 한다. 대신 Application 내부 변경이 Presentation 전체로 번지는 일을 막고, 내부 모델과 API 계약을 서로 다른 속도로 발전시킬 수 있다.
 
-| 선택 | 얻는 것 | 지불하는 비용 |
-| --- | --- | --- |
-| DTO에 transport-local 타입 선언 | Application과 Presentation을 독립적으로 변경할 수 있다. | 비슷한 필드 선언과 매핑 지점을 따로 관리한다. |
-| 경로 기반 규칙을 CI에서 강제 | 첫 금지 import에서 실패하고 모든 리뷰에 같은 기준을 적용한다. | 허용 방향과 예외를 먼저 합의하고, 폴더 구조가 바뀌면 테스트도 고쳐야 한다. |
-| 정규식으로 상대 import 검사 | 외부 도구 없이 빠르고 이해하기 쉬운 검사를 만든다. | 주석을 오인할 수 있고 alias, re-export, 동적 import를 놓친다. |
-| AST와 모듈 해석기로 확장 | 실제 import 대상을 더 정확히 찾아 오탐과 미탐을 줄인다. | 검사 코드, 의존성, 실행 시간과 유지 비용이 늘어난다. |
-| 아키텍처 규칙 자동화 | 의존 방향을 실행 가능한 문서로 남기고 구조 침식을 일찍 발견한다. | 통과 결과가 책임 분리와 응집도까지 보증하지는 않는다. 설계 리뷰는 여전히 필요하다. |
+두 번째 교환은 **단순함과 정확성**이다. 지금의 정규식 검사는 빠르고 이해하기 쉽지만 완전한 파서는 아니다. 주석을 import로 오인할 수 있고 alias, re-export, 동적 import는 놓친다. 이런 문법을 실제로 사용한다면 TypeScript Compiler API의 AST와 `resolveModuleName` 같은 해석기로 확장해야 한다. 정확도는 높아지지만 검사 코드와 실행 시간, 유지 비용도 함께 늘어난다.
 
-따라서 모든 프로젝트에 가장 강한 검사기를 먼저 넣을 필요는 없다. 계층 정책이 합의돼 있고 같은 위반이 반복될 가능성이 있다면 작은 경로 검사부터 시작할 가치가 크다. alias와 re-export를 실제로 사용해 정규식의 사각지대가 문제가 될 때 AST 검사로 확장하면 된다.
+마지막 교환은 **자동화와 판단**이다. 경계 테스트를 CI에 넣으면 첫 금지 import에서 실패하고 모든 리뷰에 같은 기준을 적용할 수 있다. 하지만 Presentation → Application 의존을 정말 금지할지는 팀이 먼저 합의해야 한다. `offenders`가 비었다고 책임 분리와 응집도까지 좋아지는 것도 아니다.
 
-핵심 트레이드오프는 **타입 선언의 중복을 조금 허용해 계층의 독립성과 변경 범위를 지키는 것**이다. 경계 테스트는 어느 쪽을 선택했는지 CI에서 일관되게 확인하는 장치다.
+이 테스트는 좋은 설계를 만들어 주지 않는다. 다만 이미 선택한 설계가 조용히 흐려지지 않도록 지켜 준다. 이 정도 역할이라면 작은 정규식 테스트 하나가 지불하는 비용보다 얻는 편이 더 크다.
