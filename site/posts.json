@@ -26,7 +26,7 @@
   {
     "slug": "superpowers-small-code-benchmark",
     "source": "scoped-superpowers-ab/workflow-code-benchmark/blog/index.md",
-    "title": "Superpowers 지금 정말 필요할까?",
+    "title": "지금 내 프로젝트에 Superpowers가 정말 필요할까?",
     "description": "작은 코드 변경에 추가된 Superpowers 절차의 이점과 비용. 직접 구현·Superpowers·개인 workflow의 토큰, 시간, 검증 과정을 비교했습니다.",
     "publishedAt": "2026-09-09",
     "draft": false
