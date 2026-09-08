@@ -1,13 +1,13 @@
 # TypeScript 계층 경계 테스트
 
-가상의 `campaign` 모듈에서 Presentation DTO가 `import type`으로 Application 타입을 참조하는 상황을 만들고, 정적 계층 검사로 발견한 뒤 transport-local 타입으로 수정합니다. 외부 서비스는 필요하지 않습니다.
+가상의 `campaign` 모듈에서 Domain 정책이 `import type`으로 Application command를 참조하는 상황을 만들고, 정적 계층 검사로 발견한 뒤 domain-local 타입으로 수정합니다. 외부 서비스는 필요하지 않습니다.
 
 ## 자료
 
 - [기술 글](./blog/index.md)
 - [계층 테스트](./test/architecture/layer-boundary.spec.ts)
-- [위반 fixture](./fixtures/violation/modules/campaign/presentation/reminder-sms/dto/get-reminder-template-response.dto.ts)
-- [수정 fixture](./fixtures/fixed/modules/campaign/presentation/reminder-sms/dto/get-reminder-template-response.dto.ts)
+- [위반 fixture](./fixtures/violation/modules/campaign/domain/reminder/reminder-schedule-policy.ts)
+- [수정 fixture](./fixtures/fixed/modules/campaign/domain/reminder/reminder-schedule-policy.ts)
 
 ## 다시 실행하기
 

@@ -24,18 +24,17 @@ function relativeImportTargets(file: string): string[] {
   );
 }
 
-test('keeps presentation DTOs as transport-local schemas', () => {
+test('keeps the domain independent from outer layers', () => {
   const sourceRoot = resolve(process.env.LAYER_SOURCE_ROOT ?? 'fixtures/fixed');
   const modulesRoot = join(sourceRoot, 'modules');
   const moduleFiles = collectTypeScriptFiles(modulesRoot);
   const offenders = moduleFiles
-    .filter((file) => file.includes('/presentation/'))
-    .filter((file) => file.includes('/dto/') && file.endsWith('.dto.ts'))
+    .filter((file) => file.includes('/domain/'))
     .filter((file) =>
       relativeImportTargets(file).some(
         (target) =>
           target.includes('/application/') ||
-          target.includes('/domain/') ||
+          target.includes('/presentation/') ||
           target.includes('/infrastructure/'),
       ),
     )

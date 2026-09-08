@@ -8,7 +8,7 @@
 | --- | --- |
 | [oom-snapshot](./oom-snapshot/README.md) | Node.js OOM 재현, Heap Snapshot 비교와 메모리 참조 분석 |
 | [k6-loadgen-isolation](./k6-loadgen-isolation/README.md) | 공유 자원의 부하 생성기 OOM과 M1 Mini 분리 시험 해석 |
-| [layer-boundary-test](./layer-boundary-test/README.md) | TypeScript 계층 컨벤션을 `import type`까지 검사하는 경계 테스트 |
+| [layer-boundary-test](./layer-boundary-test/README.md) | Domain의 역방향 타입 의존까지 검사하는 TypeScript 계층 경계 테스트 |
 
 ## 기록 방식
 

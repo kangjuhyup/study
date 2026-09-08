@@ -18,8 +18,8 @@
   {
     "slug": "typescript-layer-boundary-test",
     "source": "layer-boundary-test/blog/index.md",
-    "title": "계층 컨벤션은 테스트로 지킨다: import type 경계 검사하기",
-    "description": "팀이 합의한 계층 컨벤션을 정적 테스트로 고정하고 import type까지 검사하는 방법을 재현합니다.",
+    "title": "import type뿐인데 Domain 경계를 넘었다: 의존 컨벤션을 테스트로 지키기",
+    "description": "Domain이 Application 타입을 참조하는 역방향 의존을 재현하고, 합의한 계층 컨벤션을 정적 테스트로 고정합니다.",
     "publishedAt": "2026-09-08",
     "draft": false
   }
