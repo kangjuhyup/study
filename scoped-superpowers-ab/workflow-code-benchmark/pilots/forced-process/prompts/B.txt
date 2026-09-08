@@ -1,0 +1,11 @@
+Implement the task in contract.md in this isolated workspace. Read the existing tags.py and implement only normalize_tags; write focused unittest tests and run them. Final response must match the supplied JSON schema. Use Python 3.10 standard library only. No network, external files, dependency installation, servers, delegation, Git operations, commit or push. Only tags.py, tests/ and docs/ may change. All specification choices in contract.md are fixed. You are authorized to proceed through the assigned process without asking questions or waiting for human approvals; if a workflow calls for an approval, record it as pre-authorized for this experiment. Do not add features. No worktree, external reviewer or visual companion. If review is required, review your own artifacts locally.
+
+Both full workflow sources and a scoped router are available under workflows/. Use only the arm specified below. Human approval waits and multi-agent review are excluded equally for all arms. Final JSON: implemented (boolean), tests_passed (boolean), summary (at most 160 characters).
+
+ARM B — Deliberately apply the full process even though this is a small task. This is a forced-process experiment, not automatic scope selection. Follow these stages in order and read each corresponding workflows/full document at its stage:
+1. brainstorming.md: explore context, consider alternatives, write docs/design.md; review that design in docs/design-review.md. Approval is pre-authorized.
+2. writing-plans.md: write docs/plan.md with exact files, steps and verification; review it in docs/plan-review.md. Approval is pre-authorized.
+3. executing-plans.md and test-driven-development.md: execute the plan using RED (run new failing tests), GREEN (minimal implementation), then refactor if needed. Do not write production implementation before observing a test failure.
+4. requesting-code-review.md: review the implementation against the contract and for code quality; record findings and any fixes in docs/code-review.md. Use self-review, not a separate agent.
+5. verification-before-completion.md: run final tests afresh, record the command, exit status and result in docs/qa.md, then return the final JSON.
+Do not skip a stage merely because the task is small. These stage requirements intentionally override small-task bypasses; all common restrictions still apply.

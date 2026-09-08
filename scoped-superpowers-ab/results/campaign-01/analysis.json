@@ -1,0 +1,174 @@
+{
+  "runs": 6,
+  "arms": {
+    "A": {
+      "n": 3,
+      "correct": 3,
+      "exit_zero": 3,
+      "metrics": {
+        "wall_seconds": {
+          "median": 52.35120075009763,
+          "min": 49.84097675047815,
+          "max": 64.21124245785177
+        },
+        "input_tokens": {
+          "median": 65388,
+          "min": 65376,
+          "max": 83193
+        },
+        "cached_input_tokens": {
+          "median": 47488,
+          "min": 47488,
+          "max": 64640
+        },
+        "output_tokens": {
+          "median": 1093,
+          "min": 1030,
+          "max": 1345
+        },
+        "reasoning_output_tokens": {
+          "median": 261,
+          "min": 116,
+          "max": 285
+        },
+        "total_tokens": "unavailable"
+      }
+    },
+    "B": {
+      "n": 3,
+      "correct": 3,
+      "exit_zero": 3,
+      "metrics": {
+        "wall_seconds": {
+          "median": 66.0558633748442,
+          "min": 62.86948191653937,
+          "max": 70.82964275032282
+        },
+        "input_tokens": {
+          "median": 88429,
+          "min": 71263,
+          "max": 88618
+        },
+        "cached_input_tokens": {
+          "median": 51328,
+          "min": 49536,
+          "max": 83072
+        },
+        "output_tokens": {
+          "median": 1324,
+          "min": 1323,
+          "max": 1476
+        },
+        "reasoning_output_tokens": {
+          "median": 416,
+          "min": 333,
+          "max": 450
+        },
+        "total_tokens": "unavailable"
+      }
+    }
+  },
+  "difference_B_minus_A": {
+    "wall_seconds": {
+      "absolute": 13.704662624746561,
+      "percent": 26.178315737525853
+    },
+    "input_tokens": {
+      "absolute": 23041,
+      "percent": 35.237352419404175
+    },
+    "cached_input_tokens": {
+      "absolute": 3840,
+      "percent": 8.086253369272237
+    },
+    "output_tokens": {
+      "absolute": 231,
+      "percent": 21.134492223238794
+    },
+    "reasoning_output_tokens": {
+      "absolute": 155,
+      "percent": 59.38697318007663
+    },
+    "total_tokens": "unavailable"
+  },
+  "paired_differences": [
+    {
+      "pair": 1,
+      "differences": {
+        "wall_seconds": {
+          "absolute": 13.028505166061223,
+          "percent": 26.140148158184388
+        },
+        "input_tokens": {
+          "absolute": 5875,
+          "percent": 8.984829020615404
+        },
+        "cached_input_tokens": {
+          "absolute": 3840,
+          "percent": 8.086253369272237
+        },
+        "output_tokens": {
+          "absolute": 294,
+          "percent": 28.54368932038835
+        },
+        "reasoning_output_tokens": {
+          "absolute": 189,
+          "percent": 72.41379310344827
+        },
+        "total_tokens": "unavailable"
+      }
+    },
+    {
+      "pair": 2,
+      "differences": {
+        "wall_seconds": {
+          "absolute": 6.618400292471051,
+          "percent": 10.307229760918217
+        },
+        "input_tokens": {
+          "absolute": 5425,
+          "percent": 6.5209813325640384
+        },
+        "cached_input_tokens": {
+          "absolute": 18432,
+          "percent": 28.51485148514851
+        },
+        "output_tokens": {
+          "absolute": 131,
+          "percent": 9.739776951672862
+        },
+        "reasoning_output_tokens": {
+          "absolute": 48,
+          "percent": 16.842105263157894
+        },
+        "total_tokens": "unavailable"
+      }
+    },
+    {
+      "pair": 3,
+      "differences": {
+        "wall_seconds": {
+          "absolute": 13.704662624746561,
+          "percent": 26.178315737525853
+        },
+        "input_tokens": {
+          "absolute": 23053,
+          "percent": 35.262175721977485
+        },
+        "cached_input_tokens": {
+          "absolute": 2048,
+          "percent": 4.31266846361186
+        },
+        "output_tokens": {
+          "absolute": 230,
+          "percent": 21.043000914913083
+        },
+        "reasoning_output_tokens": {
+          "absolute": 300,
+          "percent": 258.62068965517244
+        },
+        "total_tokens": "unavailable"
+      }
+    }
+  ]
+}

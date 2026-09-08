@@ -1,0 +1,429 @@
+{
+  "n": 9,
+  "arms": {
+    "A": {
+      "n": 3,
+      "correct": 3,
+      "exit_zero": 3,
+      "metrics": {
+        "wall_seconds": {
+          "median": 74.26506487466395,
+          "min": 66.11022770777345,
+          "max": 99.38157149963081
+        },
+        "input_tokens": {
+          "median": 109956,
+          "min": 80742,
+          "max": 118586
+        },
+        "cached_input_tokens": {
+          "median": 81792,
+          "min": 62976,
+          "max": 89344
+        },
+        "output_tokens": {
+          "median": 1550,
+          "min": 1424,
+          "max": 2271
+        },
+        "reasoning_output_tokens": {
+          "median": 203,
+          "min": 73,
+          "max": 263
+        },
+        "total_tokens": "unavailable"
+      },
+      "document_files": [
+        0,
+        0,
+        0
+      ],
+      "command_counts": [
+        3,
+        4,
+        4
+      ]
+    },
+    "B": {
+      "n": 3,
+      "correct": 3,
+      "exit_zero": 3,
+      "metrics": {
+        "wall_seconds": {
+          "median": 125.45563716627657,
+          "min": 114.94952120818198,
+          "max": 126.01819462515414
+        },
+        "input_tokens": {
+          "median": 232127,
+          "min": 208450,
+          "max": 248504
+        },
+        "cached_input_tokens": {
+          "median": 203264,
+          "min": 194176,
+          "max": 217728
+        },
+        "output_tokens": {
+          "median": 2544,
+          "min": 2433,
+          "max": 2639
+        },
+        "reasoning_output_tokens": {
+          "median": 490,
+          "min": 362,
+          "max": 665
+        },
+        "total_tokens": "unavailable"
+      },
+      "document_files": [
+        0,
+        0,
+        0
+      ],
+      "command_counts": [
+        7,
+        6,
+        7
+      ]
+    },
+    "C": {
+      "n": 3,
+      "correct": 3,
+      "exit_zero": 3,
+      "metrics": {
+        "wall_seconds": {
+          "median": 71.70883333217353,
+          "min": 64.55661070719361,
+          "max": 75.63228191714734
+        },
+        "input_tokens": {
+          "median": 82776,
+          "min": 67381,
+          "max": 85816
+        },
+        "cached_input_tokens": {
+          "median": 64384,
+          "min": 48000,
+          "max": 79744
+        },
+        "output_tokens": {
+          "median": 1474,
+          "min": 1464,
+          "max": 1550
+        },
+        "reasoning_output_tokens": {
+          "median": 155,
+          "min": 126,
+          "max": 333
+        },
+        "total_tokens": "unavailable"
+      },
+      "document_files": [
+        0,
+        0,
+        0
+      ],
+      "command_counts": [
+        3,
+        2,
+        3
+      ]
+    }
+  },
+  "contrasts": {
+    "B_minus_A": {
+      "wall_seconds": {
+        "absolute": 51.190572291612625,
+        "percent": 68.92954631899426
+      },
+      "input_tokens": {
+        "absolute": 122171,
+        "percent": 111.10898905016553
+      },
+      "cached_input_tokens": {
+        "absolute": 121472,
+        "percent": 148.5133020344288
+      },
+      "output_tokens": {
+        "absolute": 994,
+        "percent": 64.12903225806451
+      },
+      "reasoning_output_tokens": {
+        "absolute": 287,
+        "percent": 141.3793103448276
+      },
+      "total_tokens": "unavailable"
+    },
+    "C_minus_A": {
+      "wall_seconds": {
+        "absolute": -2.5562315424904227,
+        "percent": -3.4420377155861064
+      },
+      "input_tokens": {
+        "absolute": -27180,
+        "percent": -24.718978500491108
+      },
+      "cached_input_tokens": {
+        "absolute": -17408,
+        "percent": -21.283255086071986
+      },
+      "output_tokens": {
+        "absolute": -76,
+        "percent": -4.903225806451613
+      },
+      "reasoning_output_tokens": {
+        "absolute": -48,
+        "percent": -23.645320197044335
+      },
+      "total_tokens": "unavailable"
+    },
+    "C_minus_B": {
+      "wall_seconds": {
+        "absolute": -53.74680383410305,
+        "percent": -42.841282423099116
+      },
+      "input_tokens": {
+        "absolute": -149351,
+        "percent": -64.34021031590466
+      },
+      "cached_input_tokens": {
+        "absolute": -138880,
+        "percent": -68.3249370277078
+      },
+      "output_tokens": {
+        "absolute": -1070,
+        "percent": -42.05974842767296
+      },
+      "reasoning_output_tokens": {
+        "absolute": -335,
+        "percent": -68.36734693877551
+      },
+      "total_tokens": "unavailable"
+    }
+  },
+  "blocks": [
+    {
+      "block": 1,
+      "contrasts": {
+        "B_minus_A": {
+          "wall_seconds": {
+            "absolute": 59.90796691738069,
+            "percent": 90.6183036945379
+          },
+          "input_tokens": {
+            "absolute": 167762,
+            "percent": 207.7753833197097
+          },
+          "cached_input_tokens": {
+            "absolute": 154752,
+            "percent": 245.7317073170732
+          },
+          "output_tokens": {
+            "absolute": 1215,
+            "percent": 85.32303370786516
+          },
+          "reasoning_output_tokens": {
+            "absolute": 417,
+            "percent": 571.2328767123288
+          },
+          "total_tokens": "unavailable"
+        },
+        "C_minus_A": {
+          "wall_seconds": {
+            "absolute": 5.598605624400079,
+            "percent": 8.4685922564774
+          },
+          "input_tokens": {
+            "absolute": 2034,
+            "percent": 2.519135022664784
+          },
+          "cached_input_tokens": {
+            "absolute": 1408,
+            "percent": 2.2357723577235773
+          },
+          "output_tokens": {
+            "absolute": 50,
+            "percent": 3.51123595505618
+          },
+          "reasoning_output_tokens": {
+            "absolute": 53,
+            "percent": 72.6027397260274
+          },
+          "total_tokens": "unavailable"
+        },
+        "C_minus_B": {
+          "wall_seconds": {
+            "absolute": -54.30936129298061,
+            "percent": -43.09644448924685
+          },
+          "input_tokens": {
+            "absolute": -165728,
+            "percent": -66.6902746032257
+          },
+          "cached_input_tokens": {
+            "absolute": -153344,
+            "percent": -70.4291593180482
+          },
+          "output_tokens": {
+            "absolute": -1165,
+            "percent": -44.145509662751046
+          },
+          "reasoning_output_tokens": {
+            "absolute": -364,
+            "percent": -74.28571428571429
+          },
+          "total_tokens": "unavailable"
+        }
+      }
+    },
+    {
+      "block": 2,
+      "contrasts": {
+        "B_minus_A": {
+          "wall_seconds": {
+            "absolute": 40.68445633351803,
+            "percent": 54.78276549300883
+          },
+          "input_tokens": {
+            "absolute": 98494,
+            "percent": 89.57583033213285
+          },
+          "cached_input_tokens": {
+            "absolute": 104832,
+            "percent": 117.3352435530086
+          },
+          "output_tokens": {
+            "absolute": 883,
+            "percent": 56.96774193548387
+          },
+          "reasoning_output_tokens": {
+            "absolute": 159,
+            "percent": 78.32512315270937
+          },
+          "total_tokens": "unavailable"
+        },
+        "C_minus_A": {
+          "wall_seconds": {
+            "absolute": -9.708454167470336,
+            "percent": -13.072706775191204
+          },
+          "input_tokens": {
+            "absolute": -42575,
+            "percent": -38.72003346793263
+          },
+          "cached_input_tokens": {
+            "absolute": -41344,
+            "percent": -46.27507163323782
+          },
+          "output_tokens": {
+            "absolute": -86,
+            "percent": -5.548387096774193
+          },
+          "reasoning_output_tokens": {
+            "absolute": 130,
+            "percent": 64.03940886699507
+          },
+          "total_tokens": "unavailable"
+        },
+        "C_minus_B": {
+          "wall_seconds": {
+            "absolute": -50.392910500988364,
+            "percent": -43.83916520167415
+          },
+          "input_tokens": {
+            "absolute": -141069,
+            "percent": -67.67522187574959
+          },
+          "cached_input_tokens": {
+            "absolute": -146176,
+            "percent": -75.28015820698748
+          },
+          "output_tokens": {
+            "absolute": -969,
+            "percent": -39.82737361282368
+          },
+          "reasoning_output_tokens": {
+            "absolute": -29,
+            "percent": -8.011049723756907
+          },
+          "total_tokens": "unavailable"
+        }
+      }
+    },
+    {
+      "block": 3,
+      "contrasts": {
+        "B_minus_A": {
+          "wall_seconds": {
+            "absolute": 26.074065666645765,
+            "percent": 26.23631853793198
+          },
+          "input_tokens": {
+            "absolute": 113541,
+            "percent": 95.74570354004689
+          },
+          "cached_input_tokens": {
+            "absolute": 121472,
+            "percent": 148.5133020344288
+          },
+          "output_tokens": {
+            "absolute": 273,
+            "percent": 12.021136063408191
+          },
+          "reasoning_output_tokens": {
+            "absolute": 402,
+            "percent": 152.85171102661596
+          },
+          "total_tokens": "unavailable"
+        },
+        "C_minus_A": {
+          "wall_seconds": {
+            "absolute": -23.74928958248347,
+            "percent": -23.897075910669912
+          },
+          "input_tokens": {
+            "absolute": -32770,
+            "percent": -27.633953417772755
+          },
+          "cached_input_tokens": {
+            "absolute": -2048,
+            "percent": -2.503912363067293
+          },
+          "output_tokens": {
+            "absolute": -721,
+            "percent": -31.748128577719065
+          },
+          "reasoning_output_tokens": {
+            "absolute": -108,
+            "percent": -41.06463878326996
+          },
+          "total_tokens": "unavailable"
+        },
+        "C_minus_B": {
+          "wall_seconds": {
+            "absolute": -49.823355249129236,
+            "percent": -39.713923084296546
+          },
+          "input_tokens": {
+            "absolute": -146311,
+            "percent": -63.03058239670525
+          },
+          "cached_input_tokens": {
+            "absolute": -123520,
+            "percent": -60.768261964735515
+          },
+          "output_tokens": {
+            "absolute": -994,
+            "percent": -39.07232704402516
+          },
+          "reasoning_output_tokens": {
+            "absolute": -510,
+            "percent": -76.69172932330827
+          },
+          "total_tokens": "unavailable"
+        }
+      }
+    }
+  ]
+}

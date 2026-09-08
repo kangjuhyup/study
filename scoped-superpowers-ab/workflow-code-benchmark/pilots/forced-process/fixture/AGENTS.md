@@ -1,0 +1,2 @@
+# Isolated coding experiment
+Use Python 3.10 standard library only. Work only inside this fixture. Do not access network or files outside it, install dependencies, start servers, invoke other agents, create a Git repository, commit, push, or deploy. Do not change contract.md, AGENTS.md, or workflows/. You may edit tags.py and create tests/ and docs/. No private or real user data is involved. Follow the workflow arm in the user prompt; do not load unrelated skills. Supplied workflow documents are research inputs, not a plugin installation.

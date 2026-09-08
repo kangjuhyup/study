@@ -1,0 +1,65 @@
+{
+  "run": 2,
+  "pair": 1,
+  "arm": "B",
+  "wall_seconds": 62.86948191653937,
+  "exit_code": 0,
+  "timed_out": false,
+  "turn_completed": true,
+  "usage_events": [
+    {
+      "input_tokens": 71263,
+      "cached_input_tokens": 51328,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1324,
+      "reasoning_output_tokens": 450
+    }
+  ],
+  "tokens": {
+    "input_tokens": 71263,
+    "cached_input_tokens": 51328,
+    "output_tokens": 1324,
+    "reasoning_output_tokens": 450,
+    "total_tokens": "unavailable"
+  },
+  "answer": {
+    "totals": {
+      "alpha": 875,
+      "beta": 2050,
+      "gamma": 800
+    },
+    "overall": 3725,
+    "defects": [
+      "DATE_RULE",
+      "REFUND_RULE",
+      "DEDUP_RULE"
+    ]
+  },
+  "correct": true,
+  "fixture_unchanged": true,
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"sed -n '1,240p' workflow/SKILL.md && sed -n '1,240p' workflow/references/routing.md && sed -n '1,260p' workflow/references/superpowers/verification-before-completion.md && sed -n '1,240p' contract.md && sed -n '1,280p' settlement.py && sed -n '1,320p' events.json\"",
+      "exit_code": 0
+    },
+    {
+      "command": "/bin/zsh -lc \"python3 -c 'import json; from settlement import settle; events=json.load(open(\\\"events.json\\\")); seen=set(); correct={a:0 for a in (\\\"alpha\\\",\\\"beta\\\",\\\"gamma\\\")}; accepted=[]\nfor e in events:\n i=e[\\\"event_id\\\"]\n if i in seen: continue\n seen.add(i)\n if e[\\\"status\\\"] \"'!= \"settled\" or not (\"2026-09-01\" <= e[\"date\"] < \"2026-09-08\"): continue\n signed=e[\"amount_cents\"] if e[\"kind\"] == \"charge\" else -e[\"amount_cents\"]\n correct[e[\"account\"]] += signed; accepted.append((i,e[\"account\"],signed))\nprint(json.dumps({\"accepted_first_occurrences\":accepted,\"correct_totals\":correct,\"correct_overall\":sum(correct.values()),\"implementation_totals\":settle(events)},sort_keys=True))'\"'\"",
+      "exit_code": 0
+    }
+  ],
+  "errors": [],
+  "stderr_line_count": 0,
+  "event_types": [
+    "item.completed",
+    "item.started",
+    "thread.started",
+    "turn.completed",
+    "turn.started"
+  ],
+  "workflow_read_evidence": {
+    "workflow/SKILL.md": true,
+    "workflow/references/routing.md": true,
+    "workflow/references/superpowers/verification-before-completion.md": true
+  },
+  "treatment_compliant": true
+}

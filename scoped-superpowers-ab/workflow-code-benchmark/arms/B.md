@@ -1,0 +1,2 @@
+# Workflow configuration: Superpowers
+The full Superpowers skills are available at workflows/full/skills/<skill-name>/SKILL.md. Load workflows/full/skills/using-superpowers/SKILL.md as the session bootstrap, then follow its applicability rules. Use local file reads as the Skill tool equivalent. Select subsequent skills yourself based on the user's request; no specific phase sequence is prescribed. The common experiment restrictions take precedence. Do not load the alternative scoped policy.

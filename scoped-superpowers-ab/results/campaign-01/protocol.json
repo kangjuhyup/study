@@ -1,0 +1,78 @@
+{
+  "started_at": "2026-09-08T14:09:18.689560+00:00",
+  "python": "Python 3.10.15",
+  "codex": "codex-cli 0.153.4",
+  "model_requested": "gpt-5.6-sol",
+  "reasoning_requested": "medium",
+  "seed": 20260908,
+  "order": [
+    [
+      1,
+      "A"
+    ],
+    [
+      1,
+      "B"
+    ],
+    [
+      2,
+      "B"
+    ],
+    [
+      2,
+      "A"
+    ],
+    [
+      3,
+      "A"
+    ],
+    [
+      3,
+      "B"
+    ]
+  ],
+  "command": [
+    "codex",
+    "exec",
+    "--ignore-user-config",
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "read-only",
+    "--model",
+    "gpt-5.6-sol",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--json",
+    "--color",
+    "never",
+    "--output-schema",
+    "/Users/kangjuhyup/Documents/study/scoped-superpowers-ab/schema.json"
+  ],
+  "fixture_sha256": {
+    "AGENTS.md": "7ffffe7685b604319d22aea6ef0dd8a912a6bf894c1af6c3addbaed38cf6cdd8",
+    "contract.md": "f7238ff84ff7b8a26628486ee67ba0aaeeea1f6a9a3c5c850421fe5c4c0a054b",
+    "events.json": "ece4a51c72a0f24dead4c473c74766e19d25574cd42c3c189bc3a469cba2d146",
+    "settlement.py": "7bbbbd0c3456a4474c73125085a8a2a2bce2c43e0bb35ad77c0a75017f31edfd",
+    "workflow/SKILL.md": "ff98e49e8f73fae207ce11111f3dfefaef4b541552c1e9581bfa67a437a04101",
+    "workflow/references/routing.md": "7858ad586cab4d1455aaae445484d97be2d8bf15449c3cc79281de4a091f8f3e",
+    "workflow/references/superpowers/verification-before-completion.md": "e6bc513fb2c747b52f7b4924c8ccc59c0486032c3a48a05e243573d4ac814872"
+  },
+  "prompt_sha256": {
+    "A.txt": "7e076942e339939cd784db52fff9e05c7671974d71e0b73a600375d7e8f3d258",
+    "B.txt": "2e41fffada8f5bdd9129cd782a4c8745d33c72c9f93f6c6824889c1244b762cd"
+  },
+  "expected": {
+    "totals": {
+      "alpha": 875,
+      "beta": 2050,
+      "gamma": 800
+    },
+    "overall": 3725,
+    "defects": [
+      "DATE_RULE",
+      "DEDUP_RULE",
+      "REFUND_RULE"
+    ]
+  }
+}

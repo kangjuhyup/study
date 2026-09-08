@@ -1,0 +1,138 @@
+[
+  {
+    "run": 1,
+    "arm": "B",
+    "skills_read": [
+      "brainstorming",
+      "test-driven-development",
+      "using-superpowers",
+      "verification-before-completion"
+    ],
+    "document_files": [],
+    "commands": 7,
+    "command_failures": 2,
+    "test_runs": 3,
+    "red_before_production": true,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 2,
+    "arm": "C",
+    "skills_read": [
+      "scoped-router"
+    ],
+    "document_files": [],
+    "commands": 3,
+    "command_failures": 1,
+    "test_runs": 1,
+    "red_before_production": false,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 3,
+    "arm": "A",
+    "skills_read": [],
+    "document_files": [],
+    "commands": 3,
+    "command_failures": 1,
+    "test_runs": 1,
+    "red_before_production": false,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 4,
+    "arm": "C",
+    "skills_read": [
+      "scoped-router"
+    ],
+    "document_files": [],
+    "commands": 2,
+    "command_failures": 1,
+    "test_runs": 1,
+    "red_before_production": false,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 5,
+    "arm": "A",
+    "skills_read": [],
+    "document_files": [],
+    "commands": 4,
+    "command_failures": 2,
+    "test_runs": 1,
+    "red_before_production": false,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 6,
+    "arm": "B",
+    "skills_read": [
+      "test-driven-development",
+      "using-superpowers",
+      "verification-before-completion"
+    ],
+    "document_files": [],
+    "commands": 6,
+    "command_failures": 2,
+    "test_runs": 3,
+    "red_before_production": true,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 7,
+    "arm": "A",
+    "skills_read": [],
+    "document_files": [],
+    "commands": 4,
+    "command_failures": 2,
+    "test_runs": 1,
+    "red_before_production": false,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 8,
+    "arm": "B",
+    "skills_read": [
+      "test-driven-development",
+      "using-superpowers",
+      "verification-before-completion"
+    ],
+    "document_files": [],
+    "commands": 7,
+    "command_failures": 2,
+    "test_runs": 3,
+    "red_before_production": true,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  },
+  {
+    "run": 9,
+    "arm": "C",
+    "skills_read": [
+      "scoped-router"
+    ],
+    "document_files": [],
+    "commands": 3,
+    "command_failures": 1,
+    "test_runs": 1,
+    "red_before_production": false,
+    "green_after_production": true,
+    "git_repository_failures": 1,
+    "correct": true
+  }
+]

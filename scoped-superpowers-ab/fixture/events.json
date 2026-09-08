@@ -1,0 +1,130 @@
+[
+  {
+    "event_id": "e1",
+    "account": "alpha",
+    "date": "2026-09-01",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 1000
+  },
+  {
+    "event_id": "e2",
+    "account": "alpha",
+    "date": "2026-09-02",
+    "status": "settled",
+    "kind": "refund",
+    "amount_cents": 250
+  },
+  {
+    "event_id": "e3",
+    "account": "beta",
+    "date": "2026-09-07",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 2300
+  },
+  {
+    "event_id": "e4",
+    "account": "gamma",
+    "date": "2026-09-08",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 9000
+  },
+  {
+    "event_id": "e5",
+    "account": "beta",
+    "date": "2026-09-03",
+    "status": "pending",
+    "kind": "charge",
+    "amount_cents": 700
+  },
+  {
+    "event_id": "e5",
+    "account": "beta",
+    "date": "2026-09-03",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 700
+  },
+  {
+    "event_id": "e6",
+    "account": "gamma",
+    "date": "2026-08-31",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 600
+  },
+  {
+    "event_id": "e6",
+    "account": "gamma",
+    "date": "2026-09-04",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 600
+  },
+  {
+    "event_id": "e7",
+    "account": "gamma",
+    "date": "2026-09-06",
+    "status": "settled",
+    "kind": "refund",
+    "amount_cents": 400
+  },
+  {
+    "event_id": "e1",
+    "account": "alpha",
+    "date": "2026-09-04",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 1000
+  },
+  {
+    "event_id": "e8",
+    "account": "beta",
+    "date": "2026-09-04",
+    "status": "settled",
+    "kind": "refund",
+    "amount_cents": 300
+  },
+  {
+    "event_id": "e9",
+    "account": "alpha",
+    "date": "2026-09-08",
+    "status": "settled",
+    "kind": "refund",
+    "amount_cents": 100
+  },
+  {
+    "event_id": "e10",
+    "account": "gamma",
+    "date": "2026-09-05",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 1200
+  },
+  {
+    "event_id": "e11",
+    "account": "alpha",
+    "date": "2026-09-07",
+    "status": "failed",
+    "kind": "charge",
+    "amount_cents": 5000
+  },
+  {
+    "event_id": "e12",
+    "account": "beta",
+    "date": "2026-09-01",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 50
+  },
+  {
+    "event_id": "e13",
+    "account": "alpha",
+    "date": "2026-09-07",
+    "status": "settled",
+    "kind": "charge",
+    "amount_cents": 125
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "status": "interrupted",
+  "reason": "User clarified target is autonomous workflow expansion, not a forced full pipeline. This pilot is excluded from the revised experiment.",
+  "tokens": "unavailable",
+  "wall_seconds": "unavailable"
+}

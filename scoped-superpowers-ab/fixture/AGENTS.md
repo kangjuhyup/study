@@ -1,0 +1,2 @@
+# Isolated read-only benchmark
+Only inspect files in this workspace. Do not modify files, use network access, start services, install dependencies, or delegate work. Use Python 3 standard library for calculations when needed. The final answer must follow the supplied JSON schema. Workflow selection is specified in the user prompt. Do not load unrelated skills. The workflow files are frozen copies for this benchmark, not a plugin installation.

@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "totals": {
+      "type": "object",
+      "properties": {
+        "alpha": {
+          "type": "integer"
+        },
+        "beta": {
+          "type": "integer"
+        },
+        "gamma": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "additionalProperties": false
+    },
+    "overall": {
+      "type": "integer"
+    },
+    "defects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "totals",
+    "overall",
+    "defects"
+  ],
+  "additionalProperties": false
+}

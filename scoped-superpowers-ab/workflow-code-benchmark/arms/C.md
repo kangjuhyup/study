@@ -1,0 +1,2 @@
+# Workflow configuration: personal scoped policy
+The rv-workflow scoped policy is available at workflows/scoped/SKILL.md. Load it as the session bootstrap and use its scope gate to decide whether any bundled workflow is needed. Select subsequent references yourself based on the user's request; no specific phase sequence is prescribed. Use local file reads as the Skill tool equivalent. The common experiment restrictions take precedence. Do not load the alternative full Superpowers policy.

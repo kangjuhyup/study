@@ -1,0 +1,5 @@
+This is a fresh-session read-only code audit benchmark. Read contract.md, settlement.py and events.json. Identify the contract violations and calculate the correct totals and overall sum. Verify your conclusions with fresh local evidence. Do not edit any file. Return only the requested JSON object. Use no tools beyond local reads and Python calculations. Do not use other skills, agents, network, or external files.
+
+The frozen rv-workflow:scoped-superpowers skill is at workflow/SKILL.md. Its scope routing is workflow/references/routing.md and its matching verification-before-completion reference is workflow/references/superpowers/verification-before-completion.md. No other workflow references are in scope.
+
+Use rv-workflow:scoped-superpowers and its bundled verification-before-completion reference for this task.

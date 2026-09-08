@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "implemented": {
+      "type": "boolean"
+    },
+    "tests_passed": {
+      "type": "boolean"
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 160
+    }
+  },
+  "required": [
+    "implemented",
+    "tests_passed",
+    "summary"
+  ],
+  "additionalProperties": false
+}

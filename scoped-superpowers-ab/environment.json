@@ -1,0 +1,17 @@
+{
+  "plugin": [
+    {
+      "pluginId": "rv-workflow@personal",
+      "version": "0.1.0+codex.20260905125105",
+      "enabled": true
+    }
+  ],
+  "package_version": "0.1.1",
+  "workflow_sha256": {
+    "fixture/workflow/SKILL.md": "ff98e49e8f73fae207ce11111f3dfefaef4b541552c1e9581bfa67a437a04101",
+    "fixture/workflow/references/routing.md": "7858ad586cab4d1455aaae445484d97be2d8bf15449c3cc79281de4a091f8f3e",
+    "fixture/workflow/references/superpowers/verification-before-completion.md": "e6bc513fb2c747b52f7b4924c8ccc59c0486032c3a48a05e243573d4ac814872"
+  },
+  "python_version": "Python 3.10.15",
+  "codex_version": "codex-cli 0.153.4"
+}

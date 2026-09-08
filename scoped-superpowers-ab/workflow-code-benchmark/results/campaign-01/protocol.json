@@ -1,0 +1,86 @@
+{
+  "started_at": "2026-09-08T14:23:45.256982+00:00",
+  "model_requested": "gpt-5.6-sol",
+  "reasoning_requested": "medium",
+  "codex": "codex-cli 0.153.4",
+  "python": "Python 3.10.15",
+  "order": [
+    [
+      1,
+      "B"
+    ],
+    [
+      1,
+      "C"
+    ],
+    [
+      1,
+      "A"
+    ],
+    [
+      2,
+      "C"
+    ],
+    [
+      2,
+      "A"
+    ],
+    [
+      2,
+      "B"
+    ],
+    [
+      3,
+      "A"
+    ],
+    [
+      3,
+      "B"
+    ],
+    [
+      3,
+      "C"
+    ]
+  ],
+  "seed": 20260908,
+  "command": [
+    "codex",
+    "exec",
+    "--ignore-user-config",
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "workspace-write",
+    "-c",
+    "approval_policy=\"never\"",
+    "--model",
+    "gpt-5.6-sol",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--json",
+    "--color",
+    "never",
+    "--output-schema",
+    "/Users/kangjuhyup/Documents/study/workflow-code-benchmark/schema.json"
+  ],
+  "fixture_sha256": {
+    "AGENTS.md": "bb04d0724d8db56591560cca1f2dedbd1ec90db3ae56b65f10b13c0716ace619",
+    "contract.md": "fd392291a3f801add851550aaf632a993204119ababde35a9c7ea317b9a46543",
+    "tags.py": "a5c5a0caad521ab32d3e65ca8e4c89eccc193a755bc8d3497ebc6d8c4d1ed643",
+    "workflows/full/brainstorming.md": "74edf03ea6d24ef53db48677b93558d14a979bdf052ca3f57ecdca0c66791608",
+    "workflows/full/executing-plans.md": "c4c3d8b628c51114cd165fb8246fe02744cd8be180032328391252e653028d9b",
+    "workflows/full/requesting-code-review.md": "d71cc01ba56d2325cf8af5f7c11837819b63ecd57de0bfdb812f7f3ff7751df8",
+    "workflows/full/test-driven-development.md": "bf1b8216e523851a411e91d429a7c1c2a173e79d88957bc78e348218d50edd54",
+    "workflows/full/verification-before-completion.md": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
+    "workflows/full/writing-plans.md": "48508f44bbfd7d24b029fbf3a314f3cd14c9615599059366e922f47b8dc08cf2",
+    "workflows/scoped/SKILL.md": "ff98e49e8f73fae207ce11111f3dfefaef4b541552c1e9581bfa67a437a04101",
+    "workflows/scoped/references/routing.md": "7858ad586cab4d1455aaae445484d97be2d8bf15449c3cc79281de4a091f8f3e",
+    "workflows/scoped/references/superpowers/verification-before-completion.md": "e6bc513fb2c747b52f7b4924c8ccc59c0486032c3a48a05e243573d4ac814872"
+  },
+  "prompts_sha256": {
+    "A.txt": "d7d8c7853008866e0edb457680fcc87fa3eb9da4e5aa2cfb6eae653b15044a58",
+    "B.txt": "0583c47b27aa904c5810233b6859b0ead70796bf0f33e91c8c45abdf11e42be1",
+    "C.txt": "7a81b45badadff49a2add839403ee84d00e3af54e2dcc16e7fb2bd4af4bec04c"
+  },
+  "grader_sha256": "007f59f82541485ec8ac8ec055451139cdce0d3e197737c442bcda1493ee5d2c"
+}
