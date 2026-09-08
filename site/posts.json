@@ -14,5 +14,13 @@
     "description": "k6도 병목이 될 수 있다. 부하 발생 환경을 분리한 이유와 300 VU 30분 측정 결과를 정리합니다.",
     "publishedAt": "2026-09-06",
     "draft": false
+  },
+  {
+    "slug": "typescript-layer-boundary-test",
+    "source": "layer-boundary-test/blog/index.md",
+    "title": "import type도 계층 경계를 넘는다: TypeScript 경계 테스트 만들기",
+    "description": "빌드가 통과한 Presentation DTO의 타입 결합을 정적 계층 테스트로 찾고 transport-local 타입으로 고친 재현 기록입니다.",
+    "publishedAt": "2026-09-08",
+    "draft": false
   }
 ]
