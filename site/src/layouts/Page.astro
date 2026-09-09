@@ -1,6 +1,7 @@
 ---
 import { site, pagePath, absoluteURL, isPreview } from '../lib/settings.mjs';
 import '../styles/global.css';
+import TechnologyBackdrop from '../components/TechnologyBackdrop.astro';
 const { title = site.title, description = site.description, path = pagePath(), article = false } = Astro.props;
 const preview = isPreview();
 ---
@@ -20,6 +21,7 @@ const preview = isPreview();
     {!preview && <meta property="og:url" content={absoluteURL(path)} />}
   </head>
   <body>
+    <TechnologyBackdrop article={article} />
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
     <header class="site-header">
       <a class="wordmark" href={pagePath()} aria-label="Study 홈">Study<span aria-hidden="true">.</span></a>

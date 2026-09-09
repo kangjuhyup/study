@@ -1,0 +1,54 @@
+---
+import node from '../assets/technology/nodedotjs.svg?raw';
+import typescript from '../assets/technology/typescript.svg?raw';
+import docker from '../assets/technology/docker.svg?raw';
+import postgres from '../assets/technology/postgresql.svg?raw';
+import redis from '../assets/technology/redis.svg?raw';
+import k6 from '../assets/technology/k6.svg?raw';
+const { article = false } = Astro.props;
+const icons = [node, typescript, docker, postgres, redis, k6];
+---
+<div class:list={['technology-backdrop', { 'reading-backdrop': article }]} aria-hidden="true">
+  {icons.map((icon, index) => <span class={`technology-mark mark-${index}`} set:html={icon} />)}
+</div>
+<style>
+  .technology-backdrop {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    color: #527da9;
+  }
+  .technology-mark {
+    position: absolute;
+    width: clamp(90px, 10vw, 150px);
+    opacity: .16;
+    transform: rotate(var(--tilt, 0deg));
+  }
+  .technology-mark :global(svg) { display: block; width: 100%; height: auto; fill: currentColor; }
+  .mark-0 { left: calc(50% - 580px); top: 14%; --tilt: -12deg; }
+  .mark-1 { right: calc(50% - 560px); top: 11%; --tilt: 12deg; }
+  .mark-2 { left: calc(50% - 490px); top: 52%; --tilt: -8deg; }
+  .mark-3 { right: calc(50% - 535px); top: 47%; --tilt: 10deg; }
+  .mark-4 { left: calc(50% - 590px); top: 83%; --tilt: 10deg; }
+  .mark-5 { right: calc(50% - 470px); top: 84%; --tilt: -12deg; }
+  .reading-backdrop .technology-mark { opacity: .07; }
+  @media (max-width: 1100px) {
+    .mark-0,.mark-4 { left: -24px; }
+    .mark-2 { left: 12px; }
+    .mark-1,.mark-3 { right: -20px; }
+    .mark-5 { right: 16px; }
+  }
+  @media (max-width: 600px) {
+    .technology-mark { width: 100px; opacity: .13; }
+    .mark-0 { top: 12%; left: -32px; }
+    .mark-1 { top: 32%; right: -22px; }
+    .mark-2 { top: 69%; left: -22px; }
+    .mark-3,.mark-4,.mark-5 { display: none; }
+    .reading-backdrop .technology-mark { opacity: .04; }
+  }
+  @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
+    .technology-backdrop { display: none; }
+  }
+</style>

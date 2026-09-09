@@ -21,6 +21,7 @@ body {
     var(--paper);
   min-height: 100vh;
   display: flow-root;
+  isolation: isolate;
 }
 main,.site-header,.site-footer,.preview-banner { width: min(100% - 64px, 1080px); }
 .site-header {
