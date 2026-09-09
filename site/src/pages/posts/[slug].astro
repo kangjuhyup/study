@@ -22,8 +22,14 @@ const { post } = Astro.props;
     </nav>}
     <div class="prose" set:html={post.html} />
     {!isPreview() && !post.draft && <section class="comments" aria-label="댓글">
-      <h2>댓글</h2>
-      <p>GitHub 계정으로 의견과 질문을 남겨 주세요.</p>
+      <header class="comments-header">
+        <div>
+          <h2>이야기 나누기</h2>
+          <p>궁금한 점이나 다른 경험이 있다면 남겨 주세요.</p>
+        </div>
+        <a class="comments-link" href={`https://github.com/kangjuhyup/study/issues?q=${encodeURIComponent(`is:issue "${post.path}"`)}`}>GitHub에서 보기 <span aria-hidden="true">↗</span></a>
+      </header>
+      <div class="comments-panel">
       <script is:inline src="https://utteranc.es/client.js"
         repo="kangjuhyup/study"
         issue-term="pathname"
@@ -31,15 +37,26 @@ const { post } = Astro.props;
         crossorigin="anonymous"
         async></script>
       <noscript>댓글을 보려면 JavaScript를 켜 주세요.</noscript>
-      <a href={`https://github.com/kangjuhyup/study/issues?q=${encodeURIComponent(`is:issue "${post.path}"`)}`}>GitHub에서 댓글 보기 ↗</a>
+      </div>
+      <p class="comments-note">GitHub 로그인 후 작성할 수 있어요. 댓글은 공개 이슈에 함께 기록됩니다.</p>
     </section>}
     <a class="back-link article-end" href={pagePath()}>← 다른 학습 기록 보기</a>
   </article>
 </Page>
 
 <style>
-  .comments { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; }
-  .comments h2 { font-size: 1.25rem; }
-  .comments p, .comments a { font-size: .9rem; }
-  .comments :global(.utterances) { max-width: 100%; }
+  .comments { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+  .comments-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+  .comments h2 { margin: 0; font-size: 1.25rem; line-height: 1.5; letter-spacing: -.035em; }
+  .comments-header p { margin: .5rem 0 0; color: var(--muted); font-size: .875rem; line-height: 1.7; }
+  .comments-link { flex-shrink: 0; padding-block: .4rem; color: var(--accent); font-size: .75rem; line-height: 1.6; text-decoration: none; }
+  .comments-link:hover { text-decoration: underline; }
+  .comments-panel { padding: 1rem; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+  .comments-note { margin: .75rem 0 0; color: var(--muted); font-size: .75rem; line-height: 1.7; }
+  .comments :global(.utterances) { max-width: 100%; margin: 0; }
+  @media (max-width: 600px) {
+    .comments { margin-top: 3rem; }
+    .comments-header { flex-direction: column; gap: .5rem; }
+    .comments-panel { padding: .5rem; }
+  }
 </style>
