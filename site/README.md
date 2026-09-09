@@ -73,6 +73,12 @@ npm run preview:review
 
 사이트 공개 후 Google Search Console에 URL 접두어 속성 `https://kangjuhyup.github.io/study/`를 추가하고 제공되는 방법으로 소유권을 확인합니다. **Sitemaps**에서 공개된 `sitemap.xml` 주소를 제출하고 **URL 검사**에서 개별 글의 수집 상태를 확인합니다. 사이트맵 제출은 검색 노출이나 순위를 보장하지 않습니다. [Google 사이트맵 안내](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
 
+## GitHub 이슈 댓글
+
+공개 글 하단에 [utterances](https://utteranc.es/)를 표시합니다. `kangjuhyup/study`의 Issues에 글 경로(`pathname`) 기준으로 연결하므로 제목 수정은 댓글 연결에 영향을 주지 않습니다. 기존 글의 slug는 유지하세요.
+
+저장소는 공개 상태와 Issues 활성화가 필요하며, [utterances GitHub App](https://github.com/apps/utterances)을 해당 저장소에 설치해야 합니다. 첫 댓글이 작성되면 연결할 이슈가 자동 생성됩니다. 댓글 작성자는 GitHub 로그인과 앱 승인이 필요합니다. 미리보기와 초안에는 위젯을 불러오지 않습니다.
+
 ## Medium에도 올리기
 
 1. Astro 글을 공개하고 원본 URL이 정상적으로 열리는지 확인합니다.

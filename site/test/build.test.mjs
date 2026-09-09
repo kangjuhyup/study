@@ -37,6 +37,8 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   assert.match(review, /PRIVATE_SENTINEL/);
   assert.match(review, /noindex, nofollow/);
   assert.doesNotMatch(review, /rel="canonical"/);
+  assert.doesNotMatch(review, /utteranc\.es\/client\.js/);
+  assert.doesNotMatch(await readFile(join(project, 'dist-preview/posts/public-post/index.html'), 'utf8'), /utteranc\.es\/client\.js/);
   assert.doesNotMatch(await readFile(join(project, 'dist-preview/sitemap.xml'), 'utf8'), /<loc>/);
   await build(false);
   const out = join(project, 'dist');
@@ -44,6 +46,9 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   assert.match(article, /rel="canonical" href="https:\/\/kangjuhyup.github.io\/study\/posts\/public-post\/"/);
   assert.match(article, /name="description" content="공개 요약"/);
   assert.match(article, /<html lang="ko">/);
+  assert.match(article, /src="https:\/\/utteranc\.es\/client\.js"/);
+  assert.match(article, /repo="kangjuhyup\/study"/);
+  assert.match(article, /issue-term="pathname"/);
   assert.doesNotMatch(article, /noindex|PRIVATE_SENTINEL/);
   assert.equal((article.match(/<h1[ >]/g) ?? []).length, 1);
   const asset = article.match(/<img src="\/study\/media\/([^"/]+)"/)[1];

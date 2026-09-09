@@ -1,7 +1,7 @@
 ---
 import Page from '../../layouts/Page.astro';
 import { loadBlog } from '../../lib/blog.mjs';
-import { site, pagePath } from '../../lib/settings.mjs';
+import { site, pagePath, isPreview } from '../../lib/settings.mjs';
 export async function getStaticPaths() {
   const { posts } = await loadBlog();
   return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
@@ -21,6 +21,25 @@ const { post } = Astro.props;
       <ol>{post.headings.filter(heading => heading.level === 2).map(heading => <li><a href={`#${heading.id}`}>{heading.text}</a></li>)}</ol>
     </nav>}
     <div class="prose" set:html={post.html} />
+    {!isPreview() && !post.draft && <section class="comments" aria-label="댓글">
+      <h2>댓글</h2>
+      <p>GitHub 계정으로 의견과 질문을 남겨 주세요.</p>
+      <script is:inline src="https://utteranc.es/client.js"
+        repo="kangjuhyup/study"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>
+      <noscript>댓글을 보려면 JavaScript를 켜 주세요.</noscript>
+      <a href={`https://github.com/kangjuhyup/study/issues?q=${encodeURIComponent(`is:issue "${post.path}"`)}`}>GitHub에서 댓글 보기 ↗</a>
+    </section>}
     <a class="back-link article-end" href={pagePath()}>← 다른 학습 기록 보기</a>
   </article>
 </Page>
+
+<style>
+  .comments { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; }
+  .comments h2 { font-size: 1.25rem; }
+  .comments p, .comments a { font-size: .9rem; }
+  .comments :global(.utterances) { max-width: 100%; }
+</style>
