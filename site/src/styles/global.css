@@ -9,7 +9,7 @@
   --muted: #526279;
   --line: #ced8e5;
   --accent: #285fa3;
-  --glass: rgba(255,255,255,.42);
+  --glass: rgba(255,255,255,.24);
   --glass-edge: rgba(255,255,255,.94);
   --glass-shadow: 0 2px 4px #203e6310, 0 18px 42px -28px #27497170, inset 0 1px 0 #ffffffee, inset 0 -1px 0 #ffffff80;
 }
@@ -29,9 +29,9 @@ main,.site-header,.site-footer,.preview-banner { width: min(100% - 64px, 1080px)
   border: 1px solid var(--glass-edge);
   border-radius: 24px;
   position: relative;
-  background: linear-gradient(115deg, #ffffffe0, #ffffff40 45%, #ffffff85);
-  -webkit-backdrop-filter: blur(14px) saturate(155%);
-  backdrop-filter: blur(14px) saturate(155%);
+  background: linear-gradient(115deg, #ffffff66, #ffffff18 45%, #ffffff38);
+  -webkit-backdrop-filter: blur(10px) saturate(145%);
+  backdrop-filter: blur(10px) saturate(145%);
   box-shadow: var(--glass-shadow);
 }
 .site-header::before, .post-summary::before {
@@ -40,7 +40,7 @@ main,.site-header,.site-footer,.preview-banner { width: min(100% - 64px, 1080px)
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(115deg, #ffffff80, transparent 22%, transparent 75%, #ffffff45);
+  background: linear-gradient(115deg, #ffffff38, transparent 16%, transparent 84%, #ffffff24);
   box-shadow: inset 1px 0 0 #fff9, inset -1px 0 0 #fff5;
 }
 .wordmark { font-family: inherit; font-size: 25px; letter-spacing: -.07em; }
@@ -62,9 +62,9 @@ main,.site-header,.site-footer,.preview-banner { width: min(100% - 64px, 1080px)
   padding: 30px 32px;
   border: 1px solid var(--glass-edge);
   border-radius: 24px;
-  background: linear-gradient(118deg, #ffffffe0, #ffffff80 48%, #ffffffa8);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  backdrop-filter: blur(12px) saturate(150%);
+  background: linear-gradient(118deg, #ffffff70, #ffffff24 48%, #ffffff45);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(140%);
   box-shadow: var(--glass-shadow);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
@@ -92,7 +92,7 @@ main,.site-header,.site-footer,.preview-banner { width: min(100% - 64px, 1080px)
   padding: 24px 28px;
   border: 1px solid #fff;
   border-radius: 20px;
-  background: linear-gradient(125deg,#edf4fbe6,#f5f3fa99);
+  background: linear-gradient(125deg,#e2edf780,#eee9f540);
   box-shadow: inset 0 1px 0 #fff, 0 6px 20px -16px #34507966;
 }
 .toc h2 { color: var(--accent); }
