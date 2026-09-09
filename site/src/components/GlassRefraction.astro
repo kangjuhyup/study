@@ -1,0 +1,28 @@
+---
+// Edge displacement approach: https://atlaspuplabs.com/blog/liquid-glass-but-in-css
+// Neutral channels preserve the center; opposing edge ramps bend the backdrop.
+const map = `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="300" viewBox="0 0 1000 300" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="x"><stop stop-color="#ff8080"/><stop offset=".035" stop-color="#808080"/><stop offset=".965" stop-color="#808080"/><stop offset="1" stop-color="#008080"/></linearGradient>
+    <linearGradient id="y" x2="0" y2="1"><stop stop-color="#80ff80"/><stop offset=".12" stop-color="#808080"/><stop offset=".88" stop-color="#808080"/><stop offset="1" stop-color="#800080"/></linearGradient>
+  </defs>
+  <rect width="1000" height="300" fill="url(#x)"/>
+  <rect width="1000" height="300" fill="url(#y)" style="mix-blend-mode:hard-light"/>
+</svg>`;
+const mapURL = `data:image/svg+xml,${encodeURIComponent(map)}`;
+---
+<svg class="glass-filter-definitions" aria-hidden="true" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glass-refraction" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage href={mapURL} width="100%" height="100%" preserveAspectRatio="none" result="edge-map" />
+      <feDisplacementMap in="SourceGraphic" in2="edge-map" scale="32" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </defs>
+</svg>
+<script>
+  // Parsing url() is not proof of SVG backdrop rendering support in Safari/Firefox.
+  // Keep ordinary frosted glass outside Chromium until visually verified there.
+  if (/Chrome\//.test(navigator.userAgent) && CSS.supports('backdrop-filter', 'url("#glass-refraction")')) {
+    document.documentElement.classList.add('glass-refraction-enabled');
+  }
+</script>

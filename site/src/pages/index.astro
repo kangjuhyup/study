@@ -1,10 +1,12 @@
 ---
 import Page from '../layouts/Page.astro';
+import GlassRefraction from '../components/GlassRefraction.astro';
 import { loadBlog } from '../lib/blog.mjs';
 import { site } from '../lib/settings.mjs';
 const { posts } = await loadBlog();
 ---
 <Page>
+  <GlassRefraction />
   <section class="intro">
     <p class="eyebrow">LEARNING NOTES</p>
     <h1>배운 것을,<br />이해한 만큼 기록합니다.</h1>
