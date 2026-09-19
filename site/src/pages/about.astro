@@ -1,0 +1,144 @@
+---
+import Page from '../layouts/Page.astro';
+import { pagePath } from '../lib/settings.mjs';
+import githubAvatar from '../assets/github-avatar.png';
+---
+<Page
+  title="About Me"
+  description="서비스 개발을 하며 운영 경험과 기술 학습 기록을 하고 있습니다."
+  path={pagePath('about/')}
+  article
+>
+  <article class="about">
+    <header class="about-intro">
+      <p class="eyebrow">ABOUT ME · JUHYUP KANG</p>
+      <h1>코드와 운영을 함께 보는<br />백엔드 개발자, 강주협입니다.</h1>
+      <div class="intro-detail">
+        <p class="lead">Android 앱과 웹·블록체인 서비스를 거쳐, TypeScript와 Kotlin으로 백엔드를 개발해 왔습니다. 기능을 만드는 일부터 인증 구조, 개발 표준, 서비스 운영까지 이어지는 문제를 다룹니다.</p>
+        <figure class="profile-photo">
+          <a href="https://github.com/kangjuhyup" aria-label="강주협의 GitHub 프로필 보기">
+            <img src={githubAvatar.src} width={githubAvatar.width} height={githubAvatar.height} alt="강주협의 GitHub 픽셀 아트 프로필 이미지" decoding="async" />
+          </a>
+          <figcaption>GITHUB · KANGJUHYUP</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <section class="about-section" aria-labelledby="work-heading">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">01</span>
+        <h2 id="work-heading">경력</h2>
+      </div>
+      <ol class="experience-list">
+        <li>
+          <div class="career-title"><h3>더즌</h3><span>아보카도팀 · main: 백엔드 개발, sub: 프론트엔드 개발</span><span class="career-period"><time datetime="2023-08">2023.08</time> ~ 현재</span></div>
+          <p>TypeScript·Kotlin 기반 서비스를 개발하고 모노레포 전환, 공통 모듈 정리, 테스트 기준 수립을 진행했습니다. Kubernetes 오토스케일링과 관측 체계를 구축하고 OIDC 기반 멀티테넌트 인증 서버를 설계·구현했습니다. 운영용 어드민 기능은 Next.js와 NestJS로 개발했습니다.</p>
+        </li>
+        <li>
+          <div class="career-title"><h3>캐리버스</h3><span>웹3개발실 · 블록체인 서비스 개발 및 연구</span><span class="career-period"><time datetime="2022-08">2022.08</time> ~ <time datetime="2023-08">2023.08</time></span></div>
+          <p>브라우저 지갑 확장에서 블록체인 노드와의 JSON-RPC 통신, 웹페이지와 확장 프로그램 사이의 연결을 구현했습니다. zkRollup 기술을 연구하고 MVP를 개발했습니다.</p>
+        </li>
+        <li>
+          <div class="career-title"><h3>크립토</h3><span>개발팀 · 앱·웹·블록체인 개발</span><span class="career-period"><time datetime="2018-09">2018.09</time> ~ <time datetime="2022-06">2022.06</time></span></div>
+          <p>Android 암호화폐 지갑, 토큰 브리지, 결제 서비스의 스마트 계약과 API를 개발했습니다. 모바일 앱부터 웹 화면, 블록체인 모니터링 서버까지 여러 경계를 연결했습니다.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="about-section" aria-labelledby="approach-heading">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">02</span>
+        <h2 id="approach-heading">일하고 기록하는 방식</h2>
+      </div>
+      <p>이해하기 쉽고 수정하기 쉬운 코드를 지향합니다. 비즈니스 맥락을 먼저 파악하고, 테스트와 공통 규칙으로 변경의 의도를 팀에 남기려 합니다.</p>
+      <p>새로운 기술을 다룰 때는 작은 재현 코드에서 시작합니다. 직접 확인한 결과, 그 결과에 대한 해석, 아직 검증하지 못한 부분을 나눠 이 블로그에 기록합니다.</p>
+    </section>
+
+    <section class="about-section about-end" aria-labelledby="connect-heading">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">03</span>
+        <h2 id="connect-heading">더 보기와 연락</h2>
+      </div>
+      <p>이메일이나 전화로 연락할 수 있습니다. 코드와 공개 활동은 GitHub에서, 이전 글은 Medium에서 볼 수 있습니다.</p>
+      <address class="contact-list">
+        <a href="mailto:fog0510@gmail.com"><span>이메일</span><strong>fog0510@gmail.com</strong></a>
+        <a href="tel:+821043485571"><span>전화</span><strong>010-4348-5571</strong></a>
+      </address>
+      <div class="about-actions">
+        <a class="primary-action" href={pagePath()}>학습 기록 보기 <span aria-hidden="true">→</span></a>
+        <a class="secondary-action" href="https://github.com/kangjuhyup">GitHub 프로필 <span aria-hidden="true">↗</span></a>
+        <a class="secondary-action" href="https://medium.com/@fog0510">Medium 글 <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </article>
+</Page>
+
+<style>
+  .about {
+    width: min(100%, 900px);
+    margin: 32px auto 0;
+    padding: 64px 72px 72px;
+    border: 1px solid #fff;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, .92);
+    box-shadow: 0 20px 70px -45px #34507966;
+  }
+  .about-intro { padding-bottom: 44px; border-bottom: 1px solid var(--line); }
+  .eyebrow { margin: 0 0 22px; }
+  h1 { margin: 0; font-size: clamp(38px, 5vw, 58px); line-height: 1.28; letter-spacing: -.055em; word-break: keep-all; }
+  .intro-detail { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 32px; align-items: center; margin-top: 28px; }
+  .lead { margin: 0; color: var(--muted); font-size: 19px; line-height: 1.8; word-break: keep-all; }
+  .profile-photo { margin: 0; text-align: center; }
+  .profile-photo a { display: block; padding: 8px; border: 1px solid #dce7f3; border-radius: 24px; background: #fff; box-shadow: 0 12px 28px -18px #34507980; }
+  .profile-photo a:hover { border-color: var(--accent); }
+  .profile-photo img { display: block; width: 100%; height: auto; border-radius: 16px; image-rendering: pixelated; }
+  .profile-photo figcaption { margin-top: 10px; color: var(--muted); font: 10px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .06em; }
+  .about-section { padding: 38px 0 42px; border-bottom: 1px solid var(--line); }
+  .section-heading { display: flex; gap: 18px; align-items: baseline; margin-bottom: 24px; }
+  .section-number { color: var(--accent); font: 12px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; }
+  h2 { margin: 0; font-size: 24px; line-height: 1.4; letter-spacing: -.04em; }
+  .about-section p { max-width: 680px; margin: 0 0 14px; color: var(--muted); font-size: 16px; line-height: 1.9; word-break: keep-all; }
+  .about-section p:last-child { margin-bottom: 0; }
+  .experience-list { display: grid; gap: 20px; list-style: none; margin: 0; padding: 0; }
+  .experience-list li { padding: 22px 24px; border: 1px solid #e4ebf2; border-radius: 16px; background: #f4f8fc; }
+  .career-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 10px; }
+  .experience-list h3 { margin: 0; font-size: 18px; letter-spacing: -.025em; }
+  .career-title span { color: var(--accent); font-size: 13px; font-weight: 700; }
+  .career-title .career-period { margin-left: auto; color: var(--muted); font: 12px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: nowrap; }
+  .experience-list p { margin: 0; font-size: 15px; }
+  .about-end { padding-bottom: 0; border-bottom: 0; }
+  .contact-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 24px; font-style: normal; }
+  .contact-list a { display: flex; flex-direction: column; gap: 7px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; text-decoration: none; overflow-wrap: anywhere; }
+  .contact-list a:hover { border-color: var(--accent); }
+  .contact-list span { color: var(--muted); font-size: 12px; }
+  .contact-list strong { font-size: 16px; font-weight: 650; }
+  .about-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .about-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 11px 18px; border-radius: 12px; font-size: 14px; font-weight: 700; text-decoration: none; }
+  .primary-action { background: var(--accent); color: #fff; }
+  .primary-action:hover { color: #fff; background: #1d4d8a; }
+  .secondary-action { border: 1px solid var(--line); color: var(--ink); }
+  .secondary-action:hover { border-color: var(--accent); }
+  .about-actions span { margin-left: 12px; }
+  @media (max-width: 600px) {
+    .about { margin-top: 20px; padding: 36px 22px 42px; border-radius: 24px; }
+    .about-intro { padding-bottom: 32px; }
+    h1 { font-size: clamp(34px, 9vw, 42px); }
+    .intro-detail { grid-template-columns: 1fr; gap: 22px; margin-top: 22px; }
+    .profile-photo { grid-row: 1; width: 118px; text-align: left; }
+    .profile-photo a { border-radius: 20px; }
+    .profile-photo img { border-radius: 12px; }
+    .profile-photo figcaption { white-space: nowrap; }
+    .lead { font-size: 16px; }
+    .about-section { padding: 30px 0 34px; }
+    .section-heading { gap: 12px; margin-bottom: 18px; }
+    h2 { font-size: 21px; }
+    .about-section p { font-size: 15px; }
+    .experience-list { gap: 12px; }
+    .experience-list li { padding: 18px; }
+    .career-title { align-items: flex-start; flex-direction: column; gap: 5px; }
+    .experience-list h3 { font-size: 16px; }
+    .career-title .career-period { margin-left: 0; }
+    .contact-list { grid-template-columns: 1fr; }
+    .about-actions a { width: 100%; }
+  }
+</style>

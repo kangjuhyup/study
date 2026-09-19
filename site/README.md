@@ -2,7 +2,9 @@
 
 학습 폴더의 Markdown과 이미지를 읽어 Astro 정적 블로그를 만듭니다. 공개할 글은 [posts.json](./posts.json)에서 관리하며, 원문을 이 폴더에 복제하지 않습니다.
 
-배포 예정 주소는 `https://kangjuhyup.github.io/study/`입니다. 이 설정을 추가하는 것만으로 GitHub Pages가 활성화되거나 글이 발행되지는 않습니다.
+고정 소개 페이지는 [`src/pages/about.astro`](./src/pages/about.astro)에서 관리합니다. 상단의 About Me 링크와 `/study/about/`에서 열립니다.
+
+공개 주소는 `https://kangjuhyup.github.io/study/`입니다.
 
 ## 로컬 환경
 

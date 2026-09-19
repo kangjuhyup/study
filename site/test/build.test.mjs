@@ -39,6 +39,9 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   assert.doesNotMatch(review, /rel="canonical"/);
   assert.doesNotMatch(review, /utteranc\.es\/client\.js/);
   assert.doesNotMatch(await readFile(join(project, 'dist-preview/posts/public-post/index.html'), 'utf8'), /utteranc\.es\/client\.js/);
+  const aboutPreview = await readFile(join(project, 'dist-preview/about/index.html'), 'utf8');
+  assert.match(aboutPreview, /noindex, nofollow/);
+  assert.doesNotMatch(aboutPreview, /rel="canonical"/);
   assert.doesNotMatch(await readFile(join(project, 'dist-preview/sitemap.xml'), 'utf8'), /<loc>/);
   await build(false);
   const out = join(project, 'dist');
@@ -61,4 +64,16 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   const files = await readdir(out, { recursive: true });
   assert(!files.some(file => /heapsnapshot|analysis\.json|\.prerender|posts\.json|\.md$/.test(file)));
   assert.doesNotMatch(await readFile(join(out, 'index.html'), 'utf8'), /미공개 글|private-post/);
+  const about = await readFile(join(out, 'about/index.html'), 'utf8');
+  assert.match(about, /rel="canonical" href="https:\/\/kangjuhyup.github.io\/study\/about\/"/);
+  assert.match(about, /<h3[^>]*>더즌<\/h3>/);
+  assert.match(about, /main: 백엔드 개발, sub: 프론트엔드 개발/);
+  assert.match(about, /<h3[^>]*>캐리버스<\/h3>/);
+  assert.match(about, /<h3[^>]*>크립토<\/h3>/);
+  assert.match(about, /<time datetime="2022-08"[^>]*>2022\.08<\/time> ~ <time datetime="2023-08"[^>]*>2023\.08<\/time>/);
+  assert.match(about, /name="description" content="서비스 개발을 하며 운영 경험과 기술 학습 기록을 하고 있습니다\."/);
+  assert.match(about, /href="mailto:fog0510@gmail.com"/);
+  assert.match(about, /href="tel:\+821043485571"/);
+  assert.match(await readFile(join(out, 'index.html'), 'utf8'), /href="\/study\/about\/"/);
+  assert.match(sitemap, /https:\/\/kangjuhyup.github.io\/study\/about\//);
 });

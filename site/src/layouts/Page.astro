@@ -4,6 +4,7 @@ import '../styles/global.css';
 import TechnologyBackdrop from '../components/TechnologyBackdrop.astro';
 const { title = site.title, description = site.description, path = pagePath(), article = false } = Astro.props;
 const preview = isPreview();
+const aboutPath = pagePath('about/');
 ---
 <!doctype html>
 <html lang="ko">
@@ -25,7 +26,10 @@ const preview = isPreview();
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
     <header class="site-header">
       <a class="wordmark" href={pagePath()} aria-label="Study 홈">Study<span aria-hidden="true">.</span></a>
-      <a class="author" href="https://github.com/kangjuhyup">{site.author} ↗</a>
+      <nav class="site-nav" aria-label="주 메뉴">
+        <a class="about-link" href={aboutPath} aria-current={path === aboutPath ? 'page' : undefined}>About Me</a>
+        <a class="author" href="https://github.com/kangjuhyup">{site.author} ↗</a>
+      </nav>
     </header>
     {preview && <div class="preview-banner">로컬 미리보기 · 아직 공개하지 않은 글이 포함되어 있습니다.</div>}
     <main id="main"><slot /></main>

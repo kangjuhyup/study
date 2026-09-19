@@ -44,6 +44,9 @@ main,.site-header,.site-footer,.preview-banner { width: min(100% - 64px, 1080px)
   background: linear-gradient(115deg, #ffffff38, transparent 16%, transparent 84%, #ffffff24);
   box-shadow: inset 1px 0 0 #fff9, inset -1px 0 0 #fff5;
 }
+.site-nav { display: flex; align-items: center; gap: 10px; }
+.about-link { padding: 10px 14px; border-radius: 30px; color: var(--muted); font-size: 13px; text-decoration: none; }
+.about-link:hover,.about-link[aria-current="page"] { color: var(--accent); background: #ffffff80; }
 .wordmark { font-family: inherit; font-size: 25px; letter-spacing: -.07em; }
 .wordmark span { color: var(--accent); }
 .author { padding: 10px 14px; border: 1px solid #fff; border-radius: 30px; background: #ffffff70; color: var(--ink); }
@@ -127,6 +130,8 @@ a:focus-visible { border-radius: 4px; }
 @media(max-width:600px) {
   main,.site-header,.site-footer,.preview-banner { width: calc(100% - 32px); }
   .site-header { margin-top: 16px; padding: 10px 16px; border-radius: 20px; }
+  .site-nav { gap: 2px; }
+  .about-link { padding: 10px 8px; font-size: 12px; }
   .author { font-size: 12px; padding: 10px; }
   .intro { padding: 48px 4px 40px; }
   .intro h1 { font-size: 35px; }
