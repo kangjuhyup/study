@@ -54,9 +54,42 @@ import githubAvatar from '../assets/github-avatar.png';
       <p>새로운 기술을 다룰 때는 작은 재현 코드에서 시작합니다. 직접 확인한 결과, 그 결과에 대한 해석, 아직 검증하지 못한 부분을 나눠 이 블로그에 기록합니다.</p>
     </section>
 
-    <section class="about-section about-end" aria-labelledby="connect-heading">
+    <section class="about-section" aria-labelledby="projects-heading">
       <div class="section-heading">
         <span class="section-number" aria-hidden="true">03</span>
+        <h2 id="projects-heading">작업물</h2>
+      </div>
+      <ul class="project-list">
+        <li><a href="https://www.npmjs.com/package/@kangjuhyup/rvlog">
+          <span class="project-type">NPM PACKAGE</span>
+          <strong>@kangjuhyup/rvlog</strong>
+          <p>데코레이터, 필드 마스킹, 오류 알림을 지원하는 TypeScript 로깅 라이브러리</p>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a></li>
+        <li><a href="https://www.npmjs.com/package/@rvkang/rv-workflow">
+          <span class="project-type">NPM PACKAGE</span>
+          <strong>@rvkang/rv-workflow</strong>
+          <p>역할별 Codex 작업 절차와 도구 버전 확인, 진행 상황 표시를 묶은 프로젝트 워크플로</p>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a></li>
+        <li><a href="https://www.npmjs.com/package/@rvkang/batch-core">
+          <span class="project-type">NPM PACKAGE</span>
+          <strong>@rvkang/batch-core</strong>
+          <p>nest-batch의 공통 계약과 도우미를 분리한 프레임워크 독립 패키지</p>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a></li>
+        <li><a href="https://kangjuhyup.github.io/auth/">
+          <span class="project-type">DOCUMENTATION</span>
+          <strong>Auth Docs</strong>
+          <p>OIDC 인증 서버와 관리자 UI의 구성·운영 방법을 정리한 문서 포털</p>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a></li>
+      </ul>
+    </section>
+
+    <section class="about-section about-end" aria-labelledby="connect-heading">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">04</span>
         <h2 id="connect-heading">더 보기와 연락</h2>
       </div>
       <p>이메일이나 전화로 연락할 수 있습니다. 코드와 공개 활동은 GitHub에서, 이전 글은 Medium에서 볼 수 있습니다.</p>
@@ -99,13 +132,22 @@ import githubAvatar from '../assets/github-avatar.png';
   h2 { margin: 0; font-size: 24px; line-height: 1.4; letter-spacing: -.04em; }
   .about-section p { max-width: 680px; margin: 0 0 14px; color: var(--muted); font-size: 16px; line-height: 1.9; word-break: keep-all; }
   .about-section p:last-child { margin-bottom: 0; }
-  .experience-list { display: grid; gap: 20px; list-style: none; margin: 0; padding: 0; }
-  .experience-list li { padding: 22px 24px; border: 1px solid #e4ebf2; border-radius: 16px; background: #f4f8fc; }
+  .experience-list { display: grid; gap: 20px; list-style: none; margin: 0; padding: 0 0 0 38px; }
+  .experience-list li { position: relative; padding: 22px 24px; border: 1px solid #e4ebf2; border-radius: 16px; background: #f4f8fc; }
+  .experience-list li::before { content: ''; position: absolute; left: -38px; top: 25px; width: 18px; height: 18px; border: 4px solid var(--accent); border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px #e6f0fa; }
+  .experience-list li:not(:last-child)::after { content: ''; position: absolute; left: -30px; top: 43px; bottom: -45px; width: 2px; background: #9ebce0; }
   .career-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 10px; }
   .experience-list h3 { margin: 0; font-size: 18px; letter-spacing: -.025em; }
   .career-title span { color: var(--accent); font-size: 13px; font-weight: 700; }
   .career-title .career-period { margin-left: auto; color: var(--muted); font: 12px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: nowrap; }
   .experience-list p { margin: 0; font-size: 15px; }
+  .project-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; }
+  .project-list a { display: flex; flex-direction: column; min-height: 188px; padding: 22px 24px; border: 1px solid #e4ebf2; border-radius: 16px; background: #f4f8fc; text-decoration: none; }
+  .project-list a:hover { border-color: var(--accent); background: #eef5fc; }
+  .project-type { color: var(--accent); font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .08em; }
+  .project-list strong { margin-top: 10px; font-size: 17px; overflow-wrap: anywhere; }
+  .project-list p { margin: 9px 0 12px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+  .project-arrow { align-self: flex-end; margin-top: auto; color: var(--accent); }
   .about-end { padding-bottom: 0; border-bottom: 0; }
   .contact-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 24px; font-style: normal; }
   .contact-list a { display: flex; flex-direction: column; gap: 7px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; text-decoration: none; overflow-wrap: anywhere; }
@@ -133,11 +175,15 @@ import githubAvatar from '../assets/github-avatar.png';
     .section-heading { gap: 12px; margin-bottom: 18px; }
     h2 { font-size: 21px; }
     .about-section p { font-size: 15px; }
-    .experience-list { gap: 12px; }
+    .experience-list { gap: 12px; padding-left: 32px; }
     .experience-list li { padding: 18px; }
+    .experience-list li::before { left: -32px; top: 22px; }
+    .experience-list li:not(:last-child)::after { left: -24px; top: 40px; bottom: -34px; }
     .career-title { align-items: flex-start; flex-direction: column; gap: 5px; }
     .experience-list h3 { font-size: 16px; }
     .career-title .career-period { margin-left: 0; }
+    .project-list { grid-template-columns: 1fr; }
+    .project-list a { min-height: 0; padding: 18px; }
     .contact-list { grid-template-columns: 1fr; }
     .about-actions a { width: 100%; }
   }
