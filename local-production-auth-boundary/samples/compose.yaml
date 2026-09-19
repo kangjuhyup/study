@@ -1,0 +1,31 @@
+services:
+  demo:
+    image: node:24.20.0-bookworm-slim
+    working_dir: /demo
+    command: ["node", "demo.mjs"]
+    volumes:
+      - ./demo.mjs:/demo/demo.mjs:ro
+    ports:
+      - "127.0.0.1:18081:8081"
+    networks: [lab]
+  edge:
+    image: envoyproxy/envoy:v1.36.9
+    command: ["-c", "/etc/envoy/envoy.yaml", "--log-level", "warning"]
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "127.0.0.1:18080:8080"
+    depends_on: [demo]
+    networks: [lab]
+  test:
+    image: node:24.20.0-bookworm-slim
+    profiles: [test]
+    command: ["node", "/demo/smoke.mjs"]
+    volumes:
+      - ./smoke.mjs:/demo/smoke.mjs:ro
+    environment:
+      EDGE_URL: http://edge:8080
+      DIRECT_URL: http://demo:8081
+    networks: [lab]
+networks:
+  lab: {}

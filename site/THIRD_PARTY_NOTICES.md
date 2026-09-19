@@ -1,6 +1,6 @@
 # Technology background icons
 
-Node.js, TypeScript, Docker, Redis, PostgreSQL and k6 SVGs are copied without modification from [Simple Icons](https://github.com/simple-icons/simple-icons/tree/777807a262bb7384ff406fd4b35fdcd02e9514c3). These technologies appear in published study posts. The icons are decorative; they do not imply endorsement. Brand marks remain the property of their respective owners.
+Node.js, TypeScript, Docker, Redis, PostgreSQL, k6, Envoy Proxy, Istio and Kubernetes SVGs are copied without modification from [Simple Icons](https://github.com/simple-icons/simple-icons/tree/777807a262bb7384ff406fd4b35fdcd02e9514c3). These technologies appear in published study posts. The icons are decorative; they do not imply endorsement. Brand marks remain the property of their respective owners.
 
 ## Simple Icons license
 

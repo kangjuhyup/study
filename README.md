@@ -10,6 +10,7 @@
 | [k6-loadgen-isolation](./k6-loadgen-isolation/README.md) | 공유 자원의 부하 생성기 OOM과 M1 Mini 분리 시험 해석 |
 | [layer-boundary-test](./layer-boundary-test/README.md) | Domain의 역방향 타입 의존까지 검사하는 TypeScript 계층 경계 테스트 |
 | [scoped-superpowers-ab](./scoped-superpowers-ab/README.md) | Superpowers와 개인 workflow의 토큰·시간 비교: 코드 감사 및 코드 변경 벤치마크 |
+| [local-production-auth-boundary](./local-production-auth-boundary/README.md) | 로컬 인증 흐름과 Envoy·Istio 외부 인가 제안의 신뢰 경계 비교 |
 
 ## 기록 방식
 

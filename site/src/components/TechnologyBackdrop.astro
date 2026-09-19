@@ -5,8 +5,11 @@ import docker from '../assets/technology/docker.svg?raw';
 import postgres from '../assets/technology/postgresql.svg?raw';
 import redis from '../assets/technology/redis.svg?raw';
 import k6 from '../assets/technology/k6.svg?raw';
+import envoy from '../assets/technology/envoyproxy.svg?raw';
+import istio from '../assets/technology/istio.svg?raw';
+import kubernetes from '../assets/technology/kubernetes.svg?raw';
 const { article = false } = Astro.props;
-const icons = [node, typescript, docker, postgres, redis, k6];
+const icons = [node, typescript, docker, postgres, redis, k6, envoy, istio, kubernetes];
 ---
 <div class:list={['technology-backdrop', { 'reading-backdrop': article }]} aria-hidden="true">
   {icons.map((icon, index) => <span class={`technology-mark mark-${index}`} set:html={icon} />)}
@@ -22,8 +25,8 @@ const icons = [node, typescript, docker, postgres, redis, k6];
   }
   .technology-mark {
     position: absolute;
-    width: clamp(90px, 10vw, 150px);
-    opacity: .16;
+    width: clamp(80px, 9vw, 130px);
+    opacity: .13;
     transform: rotate(var(--tilt, 0deg));
   }
   .technology-mark :global(svg) { display: block; width: 100%; height: auto; fill: currentColor; }
@@ -33,20 +36,25 @@ const icons = [node, typescript, docker, postgres, redis, k6];
   .mark-3 { right: calc(50% - 535px); top: 47%; --tilt: 10deg; }
   .mark-4 { left: calc(50% - 590px); top: 83%; --tilt: 10deg; }
   .mark-5 { right: calc(50% - 470px); top: 84%; --tilt: -12deg; }
-  .reading-backdrop .technology-mark { opacity: .07; }
+  .mark-6 { left: calc(50% - 535px); top: 34%; --tilt: 8deg; }
+  .mark-7 { right: calc(50% - 575px); top: 67%; --tilt: -8deg; }
+  .mark-8 { left: calc(50% - 485px); top: 96%; --tilt: 12deg; }
+  .reading-backdrop .technology-mark { opacity: .05; }
   @media (max-width: 1100px) {
     .mark-0,.mark-4 { left: -24px; }
     .mark-2 { left: 12px; }
     .mark-1,.mark-3 { right: -20px; }
     .mark-5 { right: 16px; }
+    .mark-6,.mark-8 { left: -24px; }
+    .mark-7 { right: -20px; }
   }
   @media (max-width: 600px) {
-    .technology-mark { width: 100px; opacity: .13; }
-    .mark-0 { top: 12%; left: -32px; }
-    .mark-1 { top: 32%; right: -22px; }
+    .technology-mark { width: 90px; opacity: .10; }
     .mark-2 { top: 69%; left: -22px; }
-    .mark-3,.mark-4,.mark-5 { display: none; }
-    .reading-backdrop .technology-mark { opacity: .04; }
+    .mark-6 { top: 12%; left: -32px; }
+    .mark-7 { top: 36%; right: -22px; }
+    .mark-0,.mark-1,.mark-3,.mark-4,.mark-5,.mark-8 { display: none; }
+    .reading-backdrop .technology-mark { opacity: .03; }
   }
   @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
     .technology-backdrop { display: none; }

@@ -30,5 +30,13 @@
     "description": "작은 코드 변경에 추가된 Superpowers 절차의 이점과 비용. 직접 구현·Superpowers·개인 workflow의 토큰, 시간, 검증 과정을 비교했습니다.",
     "publishedAt": "2026-09-09",
     "draft": false
+  },
+  {
+    "slug": "local-production-auth-boundary",
+    "source": "local-production-auth-boundary/blog/index.md",
+    "title": "운영 인증 흐름을 로컬에 작게 가져오기",
+    "description": "Envoy 외부 인가와 Gateway의 서명 결과 검증을 작은 Compose 샘플로 재현하고, 정상·거부 요청 12개로 인증 경계를 확인합니다.",
+    "publishedAt": "2026-09-19",
+    "draft": false
   }
 ]
