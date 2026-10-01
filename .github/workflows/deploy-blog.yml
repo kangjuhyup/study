@@ -35,6 +35,9 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Build public posts only
+        env:
+          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID || secrets.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.PUBLIC_GOOGLE_SITE_VERIFICATION }}
         run: npm run build
       - name: Upload production output
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

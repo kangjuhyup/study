@@ -7,8 +7,10 @@ export async function getStaticPaths() {
   return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
 }
 const { post } = Astro.props;
+// 도메인 이전 전의 pathname을 유지해 기존 댓글 이슈와 연결합니다.
+const commentIssueTerm = `/study/posts/${post.slug}/`;
 ---
-<Page title={post.title} description={post.description} path={post.path} article>
+<Page title={post.title} description={post.description} path={post.path} publishedAt={post.publishedAt} images={post.images} article>
   <article class="article">
     <header class="article-header">
       <a class="back-link" href={pagePath()}>← 학습 기록</a>
@@ -27,12 +29,12 @@ const { post } = Astro.props;
           <h2>이야기 나누기</h2>
           <p>궁금한 점이나 다른 경험이 있다면 남겨 주세요.</p>
         </div>
-        <a class="comments-link" href={`https://github.com/kangjuhyup/study/issues?q=${encodeURIComponent(`is:issue "${post.path}"`)}`}>GitHub에서 보기 <span aria-hidden="true">↗</span></a>
+        <a class="comments-link" href={`https://github.com/kangjuhyup/study/issues?q=${encodeURIComponent(`is:issue "${commentIssueTerm}"`)}`}>GitHub에서 보기 <span aria-hidden="true">↗</span></a>
       </header>
       <div class="comments-panel">
       <script is:inline src="https://utteranc.es/client.js"
         repo="kangjuhyup/study"
-        issue-term="pathname"
+        issue-term={commentIssueTerm}
         theme="github-light"
         crossorigin="anonymous"
         async></script>

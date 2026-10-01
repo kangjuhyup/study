@@ -75,7 +75,7 @@ test('Code examples retain their original text without interpreting HTML or Mark
   assert.equal(images.size, 0);
 });
 
-test('Local images use the GitHub Pages base and preserve source bytes', async t => {
+test('Local images use the custom domain root and preserve source bytes', async t => {
   const bytes = Buffer.from([137, 80, 78, 71, 0, 255, 13, 10]);
   const options = await fixture(t, [entry('image')], {
     'image/index.md': '# Title image\n\n![Snapshot](images/heap%20snapshot.png)',
@@ -85,7 +85,7 @@ test('Local images use the GitHub Pages base and preserve source bytes', async t
   assert.equal(images.size, 1);
   const [name, asset] = [...images][0];
   assert.match(name, /^[a-f0-9]{64}\.png$/);
-  assert.ok(post.html.includes(`src="/study/media/${name}"`));
+  assert.ok(post.html.includes(`src="/media/${name}"`));
   assert.deepEqual(asset.bytes, bytes);
   assert.equal(asset.contentType, 'image/png');
 });
@@ -137,5 +137,5 @@ test('Links to published local articles resolve to their public addresses and fr
     'second/index.md': '# Title second\n\n## Findings\n\nResults.',
   });
   const { posts } = await loadBlog({ ...options, preview: false });
-  assert.match(posts.find(post => post.slug === 'first').html, /href="\/study\/posts\/second\/#findings"/);
+  assert.match(posts.find(post => post.slug === 'first').html, /href="\/posts\/second\/#findings"/);
 });
