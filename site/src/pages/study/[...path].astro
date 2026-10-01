@@ -1,0 +1,28 @@
+---
+import { loadBlog } from '../../lib/blog.mjs';
+import { absoluteURL, pagePath } from '../../lib/settings.mjs';
+
+export async function getStaticPaths() {
+  const { posts } = await loadBlog();
+  return [pagePath(), pagePath('about/'), ...posts.map(post => post.path)].map(target => ({
+    params: { path: target.slice(1).replace(/\/$/, '') || undefined },
+    props: { target },
+  }));
+}
+const { target } = Astro.props;
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>블로그 주소 변경 · Study</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={absoluteURL(target)} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <script define:vars={{ target }}>
+      window.location.replace(target + window.location.search + window.location.hash);
+    </script>
+  </head>
+  <body><p>블로그 주소가 변경되었습니다. <a href={target}>새 주소로 이동하기</a></p></body>
+</html>

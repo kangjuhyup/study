@@ -2,9 +2,9 @@
 
 학습 폴더의 Markdown과 이미지를 읽어 Astro 정적 블로그를 만듭니다. 공개할 글은 [posts.json](./posts.json)에서 관리하며, 원문을 이 폴더에 복제하지 않습니다.
 
-고정 소개 페이지는 [`src/pages/about.astro`](./src/pages/about.astro)에서 관리합니다. 상단의 About Me 링크와 `/study/about/`에서 열립니다.
+고정 소개 페이지는 [`src/pages/about.astro`](./src/pages/about.astro)에서 관리합니다. 상단의 About Me 링크와 `/about/`에서 열립니다.
 
-공개 주소는 `https://kangjuhyup.github.io/study/`입니다.
+공개 주소는 `https://blog.rvkang.app/`입니다.
 
 ## 로컬 환경
 
@@ -21,7 +21,7 @@ npm ci
 npm run dev
 ```
 
-버전 출력은 각각 `v24.20.0`, `11.19.0`이어야 합니다. 개발 서버의 `/study/`에서 목록과 초안을 확인합니다. 서버를 종료하려면 `Ctrl+C`를 누릅니다.
+버전 출력은 각각 `v24.20.0`, `11.19.0`이어야 합니다. 개발 서버의 `/`에서 목록과 초안을 확인합니다. 서버를 종료하려면 `Ctrl+C`를 누릅니다.
 
 ## 검증과 초안 검토
 
@@ -71,13 +71,94 @@ npm run preview:review
 
 실제 발행을 진행할 때 저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 선택합니다. 이후 `main`에 반영하거나 Actions에서 workflow를 실행하고 성공 여부와 공개 주소를 확인합니다. 수동 실행도 `main`에서만 배포합니다. [Astro 공식 배포 안내](https://docs.astro.build/en/guides/deploy/github/)
 
-## 검색 등록
+## SEO 기본 설정과 검색 등록
 
-사이트 공개 후 Google Search Console에 URL 접두어 속성 `https://kangjuhyup.github.io/study/`를 추가하고 제공되는 방법으로 소유권을 확인합니다. **Sitemaps**에서 공개된 `sitemap.xml` 주소를 제출하고 **URL 검사**에서 개별 글의 수집 상태를 확인합니다. 사이트맵 제출은 검색 노출이나 순위를 보장하지 않습니다. [Google 사이트맵 안내](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+검색 메타데이터는 [`Seo.astro`](./src/components/Seo.astro)에서 생성합니다. 공개 글의 `posts.json`에 등록된 제목·요약·발행일과 원문 이미지를 사용하며, 빌드 날짜를 글의 수정일로 만들지 않습니다.
+
+| 설정 | 동작 |
+| --- | --- |
+| 제목·설명·언어 | 페이지별 title과 description, 한국어 언어 정보 |
+| canonical | UTM 등 쿼리 문자열을 제외한 원본 URL |
+| 구조화 데이터 | 글의 `BlogPosting`에 제목·설명·작성자·실제 발행일·본문 이미지, 하위 페이지에 `BreadcrumbList` |
+| 공유 카드 | Open Graph와 Twitter 카드. 본문의 첫 이미지, 이미지가 없으면 작성자 프로필 이미지 사용 |
+| 검색 허용 | 공개 페이지는 `index, follow, max-image-preview:large` |
+| 초안 보호 | 미리보기는 `noindex, nofollow`, canonical·구조화 데이터·소유권 확인 태그 제외 |
+| 사이트맵 | 공개 글·홈·소개 페이지의 절대 URL만 포함 |
+
+구조화 데이터의 글 이미지는 실제 본문 이미지가 있을 때만 기록합니다. 공유 카드의 기본 프로필 이미지를 글의 대표 이미지로 구조화 데이터에 넣지는 않습니다. 글의 정확한 수정일은 현재 관리하지 않으므로 `dateModified`와 사이트맵 `lastmod`를 생략합니다. 제목과 요약은 글 내용을 구체적으로 설명하도록 작성하고 공개 slug를 유지하세요. [Google Article 구조화 데이터 안내](https://developers.google.com/search/docs/appearance/structured-data/article)
+
+### Google Search Console 연결
+
+1. [Google Search Console](https://search.google.com/search-console/)에서 **URL 접두어** 속성 `https://blog.rvkang.app/`를 추가합니다.
+2. 소유권 확인 방법으로 **HTML 태그**를 선택합니다. 제공된 `<meta name="google-site-verification" content="...">`에서 `content` 값만 복사합니다.
+3. GitHub 저장소의 **Settings → Secrets and variables → Actions → Variables**에 `PUBLIC_GOOGLE_SITE_VERIFICATION` 이름으로 값을 등록합니다. 전체 HTML 태그를 넣지 않습니다. 로컬 빌드 확인은 `site/.env`에 같은 변수를 지정합니다.
+4. 코드 변경을 `main`에 반영한 뒤 배포 workflow를 실행합니다. 공개 홈의 소스에 확인 태그가 있는지 확인하고 Search Console에서 **확인**을 누릅니다. 확인 후에도 변수와 태그를 유지합니다.
+5. **Sitemaps**에 `https://blog.rvkang.app/sitemap.xml`을 제출합니다. **URL 검사**에서 공개 글의 수집 상태를 확인하고 필요하면 색인 생성을 요청합니다.
+6. [리치 결과 테스트](https://search.google.com/test/rich-results)에 공개 글 URL을 넣어 구조화 데이터를 확인합니다. 본문 이미지가 없는 글은 이미지 관련 권장사항이 남을 수 있습니다.
+
+소유권 확인 코드는 GA4 측정 ID와 별개입니다. 코드를 설정하지 않아도 기본 SEO 메타데이터는 생성됩니다. 검색 계정 등록과 사이트맵 제출은 계정에서 직접 진행해야 하며, 태그·사이트맵·구조화 데이터는 검색 노출이나 순위를 보장하지 않습니다. [Google 소유권 확인 안내](https://support.google.com/webmasters/answer/9008080?hl=ko), [Google 사이트맵 안내](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+
+### 개인 도메인과 이전 링크
+
+GitHub 저장소의 **Settings → Pages → Custom domain**은 `blog.rvkang.app`으로 설정합니다. 공개 사이트의 루트는 `/`이며, robots.txt와 사이트맵은 각각 `https://blog.rvkang.app/robots.txt`, `https://blog.rvkang.app/sitemap.xml`에 배포됩니다. robots.txt의 Sitemap 항목도 같은 도메인을 가리킵니다.
+
+이전 `https://kangjuhyup.github.io/study/` 링크는 GitHub Pages가 개인 도메인으로 이동시킵니다. 개인 도메인에 남은 `/study/`, `/study/about/`, `/study/posts/글-slug/` 링크도 새 경로로 이동하는 정적 페이지를 생성합니다. 이 페이지들은 검색 대상에서 제외하고 사이트맵에도 넣지 않습니다. JavaScript 이동은 공유 링크의 쿼리 문자열과 본문 앵커를 유지하며, JavaScript가 꺼져 있으면 기본 새 경로로 이동합니다.
+
+Cloudflare 프록시를 사용하는 경우 GitHub의 HTTPS 인증서 발급과 Cloudflare의 HTTPS 응답은 별개입니다. HTTP 요청이 HTTPS로 이동하는지도 확인하세요. 다른 서비스에 영향을 주지 않도록 블로그 호스트만 대상으로 HTTPS 이동 규칙을 적용할 수 있습니다.
+
+향후 도메인을 바꿀 때는 [`settings.mjs`](./src/lib/settings.mjs)의 `site.origin`과 `site.base`를 실제 URL에 맞게 수정하고, Search Console 속성·사이트맵과 GA4 웹 스트림 URL도 확인합니다. 이 값은 canonical·구조화 데이터·내부 경로와 방문 통계의 공개 호스트 검사에 사용됩니다.
+
+## 방문 통계, 글별 조회수와 유입 경로 (GA4)
+
+공개 페이지의 공통 레이아웃에 GA4를 연결합니다. 측정 ID를 설정하지 않으면 분석 스크립트를 포함하지 않습니다. 개발 서버와 초안 미리보기는 수집하지 않으며, 공개 빌드도 `https://blog.rvkang.app/`에서 열릴 때만 Google 태그를 불러옵니다. 블로그 안에 통계 화면을 공개하지 않고 본인의 Google Analytics 계정에서 확인합니다.
+
+### 처음 연결하기
+
+1. [Google Analytics](https://analytics.google.com/)에서 GA4 속성을 만들고 **관리 → 데이터 스트림 → 웹**을 선택합니다. 웹사이트 URL은 `https://blog.rvkang.app/`로 지정합니다.
+2. 웹 스트림 상세 화면에서 `G-`로 시작하는 **측정 ID**를 복사합니다. 속성 ID나 `GTM-`으로 시작하는 태그 관리자 ID와 다릅니다.
+3. GitHub 저장소의 **Settings → Secrets and variables → Actions → Variables → New repository variable**에서 이름을 `PUBLIC_GA_MEASUREMENT_ID`, 값을 복사한 측정 ID로 등록합니다. 측정 ID는 공개 HTML에 포함되는 식별자이며 비밀키가 아닙니다.
+4. **Actions → Build and deploy study blog → Run workflow**에서 `main`을 선택해 다시 배포합니다. 변수 변경만으로 기존 배포가 바뀌지는 않습니다.
+5. 공개 블로그를 열고 GA4의 **실시간** 보고서에서 방문이 들어오는지 확인합니다. 일반 보고서에는 처리 시간이 필요합니다.
+
+로컬에서 태그가 포함된 빌드를 확인하려면 `site/.env.example`을 `site/.env`로 복사하고 측정 ID를 입력한 뒤 `npm run build`를 실행합니다. `.env`는 커밋하지 않습니다. localhost에서 결과를 열어도 통계는 전송하지 않습니다. 수집을 중단하려면 GitHub Actions 변수를 비우거나 삭제한 뒤 다시 배포합니다.
+
+### 어디를 통해 들어왔는지 확인하기
+
+GA4의 **보고서 → 획득 → 트래픽 획득**에서 **세션 소스/매체**를 선택합니다. 보고서 모음에 따라 획득 메뉴는 비즈니스 목표 아래에 표시될 수 있습니다. 검색 유입, 다른 사이트의 링크와 SNS 유입을 비교하고 **방문 페이지 + 쿼리 문자열**을 보조 측정기준으로 추가하면 어떤 글로 들어왔는지도 확인할 수 있습니다. [Google 트래픽 획득 보고서 안내](https://support.google.com/analytics/answer/12923437?hl=ko)
+
+주소 직접 입력·북마크뿐 아니라 앱이나 브라우저가 출처를 전달하지 않는 방문도 `(direct) / (none)`으로 나타날 수 있습니다. 모든 방문의 출처를 복원하거나 검색어를 알아낼 수 있는 것은 아닙니다. 수집 시작 전 방문 기록은 소급해서 생성되지 않으며, 태그를 차단한 방문은 집계에서 빠질 수 있습니다.
+
+### 어떤 글을 몇 명이 봤는지 확인하기
+
+공통 레이아웃의 Google 태그는 글을 열 때 `page_view`를 자동으로 수집하며 페이지 주소와 제목도 기록합니다. 별도의 조회 이벤트를 추가하지 않습니다. 수동 `page_view`를 함께 보내면 조회수가 중복될 수 있습니다. [Google 페이지 조회 수집 안내](https://developers.google.com/analytics/devguides/collection/ga4/views)
+
+GA4의 **보고서 → 참여도 → 페이지 및 화면**에서 기간을 선택하고, 측정기준을 **페이지 경로 및 화면 클래스**로 바꿉니다. `/posts/`로 시작하는 경로만 포함하도록 필터를 적용하면 홈과 소개 페이지를 제외하고 글별 통계를 볼 수 있습니다. **페이지 제목 및 화면 클래스**로 바꾸면 글 제목으로 확인할 수 있으며, 제목을 수정한 글을 합산할 때는 경로를 기준으로 봅니다. 쿼리 문자열을 포함하지 않는 경로를 사용하면 UTM이 다른 공유 링크도 같은 글로 묶입니다. [Google 페이지 및 화면 보고서 안내](https://support.google.com/analytics/answer/12926732?hl=ko)
+
+| 지표 | 의미 |
+| --- | --- |
+| 조회수 | 글 페이지가 열린 횟수. 같은 사용자의 재방문과 새로고침도 포함 |
+| 총 사용자 | 선택한 기간에 그 글에서 이벤트를 발생시킨 중복 제거 사용자 수 |
+| 활성 사용자 | GA4의 참여 조건을 충족한 사용자 수. 총 사용자와 다를 수 있음 |
+
+기본 보고서에는 **활성 사용자**가 표시됩니다. 글을 연 전체 사용자 수를 보려면 **탐색 → 자유 형식**에서 행에 **페이지 경로 및 화면 클래스**, 값에 **조회수**와 **총 사용자**를 추가하고, **이벤트 이름 = `page_view`**, **페이지 경로 및 화면 클래스가 `/posts/`로 시작**하는 필터를 적용합니다. 예를 들어 GA4가 구분한 사용자 10명이 같은 글을 각각 두 번 열었다면 조회수는 20회, 총 사용자는 10명입니다. [Google 사용자 지표 안내](https://support.google.com/analytics/answer/12253918?hl=ko)
+
+이 블로그에는 로그인 기반 사용자 식별이 없으므로 사용자 수는 브라우저 식별자에 기반한 추정치입니다. 같은 사람이 다른 기기·브라우저를 쓰거나 쿠키를 삭제하면 여러 사용자로 잡힐 수 있습니다. 글별 사용자 수를 더해도 블로그 전체 사용자 수와 같지는 않습니다. 한 사용자가 여러 글을 읽을 수 있기 때문입니다. [Google 사용자 식별 안내](https://support.google.com/analytics/answer/10976610?hl=ko)
+
+### Medium과 SNS에 공유할 링크
+
+공유 링크에 `utm_source`, `utm_medium`, `utm_campaign`을 붙이면 출처가 전달되지 않아도 지정한 유입 경로를 기록할 수 있습니다. 아래 링크의 `/`를 공유할 글 경로로 바꿔 사용하세요.
+
+| 공유 위치 | 링크 예시 |
+| --- | --- |
+| Medium 글의 원문 링크 | `https://blog.rvkang.app/?utm_source=medium&utm_medium=referral&utm_campaign=study_share` |
+| LinkedIn 게시물 | `https://blog.rvkang.app/?utm_source=linkedin&utm_medium=social&utm_campaign=study_share` |
+| 카카오톡 공유 | `https://blog.rvkang.app/?utm_source=kakaotalk&utm_medium=social&utm_campaign=study_share` |
+
+GA4에서 세션 소스/매체와 세션 캠페인으로 비교합니다. UTM은 공유한 링크의 표식이므로 링크를 다른 곳에 재공유해도 원래 지정한 출처로 기록될 수 있습니다. 블로그 내부 링크, sitemap과 canonical에는 UTM을 붙이지 않습니다. [Google GA4 UTM 안내](https://support.google.com/analytics/answer/11242870?hl=ko)
 
 ## GitHub 이슈 댓글
 
-공개 글 하단에 [utterances](https://utteranc.es/)를 표시합니다. `kangjuhyup/study`의 Issues에 글 경로(`pathname`) 기준으로 연결하므로 제목 수정은 댓글 연결에 영향을 주지 않습니다. 기존 글의 slug는 유지하세요.
+공개 글 하단에 [utterances](https://utteranc.es/)를 표시합니다. `kangjuhyup/study`의 Issues에 도메인 이전 전의 `/study/posts/글-slug/`를 고정 `issue-term`으로 사용하므로 도메인과 제목 수정은 댓글 연결에 영향을 주지 않습니다. 기존 글의 slug는 유지하세요.
 
 저장소는 공개 상태와 Issues 활성화가 필요하며, [utterances GitHub App](https://github.com/apps/utterances)을 해당 저장소에 설치해야 합니다. 첫 댓글이 작성되면 연결할 이슈가 자동 생성됩니다. 댓글 작성자는 GitHub 로그인과 앱 승인이 필요합니다. 미리보기와 초안에는 위젯을 불러오지 않습니다.
 

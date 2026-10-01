@@ -24,3 +24,5 @@
 ## 블로그
 
 학습 기록을 Astro 블로그의 원본으로 발행하고, 선택한 글을 Medium에도 가져옵니다. 로컬 미리보기, 공개 대상 관리와 배포 방법은 [블로그 운영 안내](./site/README.md)를 참고하세요.
+
+공개 블로그는 [blog.rvkang.app](https://blog.rvkang.app/)에서 확인할 수 있습니다.

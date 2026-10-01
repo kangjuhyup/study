@@ -68,6 +68,7 @@ export async function loadBlog({ workspaceRoot = defaultWorkspace, manifestPath 
     if (tokens[0]?.type !== 'heading_open' || tokens[0].tag !== 'h1' || headingText(tokens[1]) !== entry.title) throw new Error(`${entry.source}: 첫 제목은 등록한 title과 같아야 합니다.`);
     tokens.splice(0, 3);
     const headings = [];
+    const postImages = [];
     const ids = new Set();
     for (let i = 0; i < tokens.length; i++) {
       if (tokens[i].type !== 'heading_open') continue;
@@ -100,6 +101,7 @@ export async function loadBlog({ workspaceRoot = defaultWorkspace, manifestPath 
           }
           token.attrSet('loading', 'lazy');
           token.attrSet('decoding', 'async');
+          postImages.push({ src: token.attrGet('src'), alt: token.content });
         }
         if (token.type === 'link_open') {
           const href = token.attrGet('href');
@@ -117,7 +119,7 @@ export async function loadBlog({ workspaceRoot = defaultWorkspace, manifestPath 
       }
     }
     await visit(tokens);
-    posts.push({ ...entry, path: pagePath(`posts/${entry.slug}/`), html: md.renderer.render(tokens, md.options, {}), headings });
+    posts.push({ ...entry, path: pagePath(`posts/${entry.slug}/`), html: md.renderer.render(tokens, md.options, {}), headings, images: postImages });
   }
   posts.sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '') || a.slug.localeCompare(b.slug));
   return { posts, images, preview };

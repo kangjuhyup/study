@@ -2,8 +2,8 @@ export const site = {
   title: 'Study',
   author: 'kangjuhyup',
   description: '직접 실험하고, 원인을 찾고, 이해한 내용을 기록합니다.',
-  origin: 'https://kangjuhyup.github.io',
-  base: '/study/',
+  origin: 'https://blog.rvkang.app',
+  base: '/',
 };
 
 export const pagePath = (slug = '') => `${site.base}${slug}`;

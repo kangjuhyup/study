@@ -1,8 +1,10 @@
 ---
-import { site, pagePath, absoluteURL, isPreview } from '../lib/settings.mjs';
+import { site, pagePath, isPreview } from '../lib/settings.mjs';
 import '../styles/global.css';
 import TechnologyBackdrop from '../components/TechnologyBackdrop.astro';
-const { title = site.title, description = site.description, path = pagePath(), article = false } = Astro.props;
+import Analytics from '../components/Analytics.astro';
+import Seo from '../components/Seo.astro';
+const { title = site.title, description = site.description, path = pagePath(), article = false, publishedAt, images = [] } = Astro.props;
 const preview = isPreview();
 const aboutPath = pagePath('about/');
 ---
@@ -11,15 +13,8 @@ const aboutPath = pagePath('about/');
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title === site.title ? `${site.title} · ${site.author}` : `${title} · ${site.title}`}</title>
-    <meta name="description" content={description} />
-    <meta name="author" content={site.author} />
-    {preview ? <meta name="robots" content="noindex, nofollow" /> : <link rel="canonical" href={absoluteURL(path)} />}
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content={article ? 'article' : 'website'} />
-    <meta property="og:locale" content="ko_KR" />
-    {!preview && <meta property="og:url" content={absoluteURL(path)} />}
+    <Seo {title} {description} {path} {publishedAt} {images} />
+    <Analytics />
   </head>
   <body>
     <TechnologyBackdrop article={article} />
