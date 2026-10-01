@@ -116,7 +116,7 @@ Cloudflare 프록시를 사용하는 경우 GitHub의 HTTPS 인증서 발급과 
 
 1. [Google Analytics](https://analytics.google.com/)에서 GA4 속성을 만들고 **관리 → 데이터 스트림 → 웹**을 선택합니다. 웹사이트 URL은 `https://blog.rvkang.app/`로 지정합니다.
 2. 웹 스트림 상세 화면에서 `G-`로 시작하는 **측정 ID**를 복사합니다. 속성 ID나 `GTM-`으로 시작하는 태그 관리자 ID와 다릅니다.
-3. GitHub 저장소의 **Settings → Secrets and variables → Actions → Variables → New repository variable**에서 이름을 `PUBLIC_GA_MEASUREMENT_ID`, 값을 복사한 측정 ID로 등록합니다. 측정 ID는 공개 HTML에 포함되는 식별자이며 비밀키가 아닙니다.
+3. GitHub 저장소의 **Settings → Secrets and variables → Actions → Variables → New repository variable**에서 이름을 `PUBLIC_GA_MEASUREMENT_ID`, 값을 복사한 측정 ID로 등록합니다. 같은 이름으로 **Secrets → New repository secret**에 등록해도 배포 workflow가 읽습니다. 두 곳 모두 설정하면 Variables 값을 우선합니다. 측정 ID는 공개 HTML에 포함되는 식별자이며 비밀키가 아닙니다.
 4. **Actions → Build and deploy study blog → Run workflow**에서 `main`을 선택해 다시 배포합니다. 변수 변경만으로 기존 배포가 바뀌지는 않습니다.
 5. 공개 블로그를 열고 GA4의 **실시간** 보고서에서 방문이 들어오는지 확인합니다. 일반 보고서에는 처리 시간이 필요합니다.
 
