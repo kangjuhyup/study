@@ -8,4 +8,4 @@ Oracle A1 인스턴스의 기존 K3s 환경을 초기화하고, 클러스터 재
 
 이 폴더는 문서만 관리하며 실행 코드나 별도 런타임은 없습니다. 원본 인프라 저장소의 코드·로그·운영 데이터는 복제하지 않습니다.
 
-2026-10-01에 [블로그 글](https://kangjuhyup.github.io/study/posts/oracle-a1-k3s-gitops/)로 발행했습니다. 원문을 수정하면 다음 공개 빌드에 반영됩니다. 검토와 배포 절차는 [블로그 운영 안내](../site/README.md)를 따릅니다.
+2026-10-01에 [블로그 글](https://blog.rvkang.app/posts/oracle-a1-k3s-gitops/)로 발행했습니다. 원문을 수정하면 다음 공개 빌드에 반영됩니다. 검토와 배포 절차는 [블로그 운영 안내](../site/README.md)를 따릅니다.
