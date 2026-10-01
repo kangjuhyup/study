@@ -38,5 +38,14 @@
     "description": "Envoy 외부 인가와 Gateway의 서명 결과 검증을 작은 Compose 샘플로 재현하고, 정상·거부 요청 12개로 인증 경계를 확인합니다.",
     "publishedAt": "2026-09-19",
     "draft": false
+  },
+  {
+    "slug": "oracle-a1-k3s-gitops",
+    "source": "k3s-gitops/blog/index.md",
+    "title": "Oracle A1 한 대로 시작하는 K3s: 구축부터 GitOps 운영까지",
+    "description": "기존 Oracle A1의 K3s 환경을 초기화하고, Argo CD GitOps 배포·외부 TLS·비밀값·데이터 관리와 모니터링을 구성한 운영 기록입니다.",
+    "publishedAt": "2026-10-01",
+    "draft": false,
+    "showToc": false
   }
 ]

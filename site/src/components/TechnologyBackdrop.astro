@@ -8,10 +8,27 @@ import k6 from '../assets/technology/k6.svg?raw';
 import envoy from '../assets/technology/envoyproxy.svg?raw';
 import istio from '../assets/technology/istio.svg?raw';
 import kubernetes from '../assets/technology/kubernetes.svg?raw';
+import k3s from '../assets/technology/k3s.svg?raw';
+import argo from '../assets/technology/argo.svg?raw';
+import ansible from '../assets/technology/ansible.svg?raw';
+import terraform from '../assets/technology/terraform.svg?raw';
+import githubactions from '../assets/technology/githubactions.svg?raw';
+import prometheus from '../assets/technology/prometheus.svg?raw';
+import grafana from '../assets/technology/grafana.svg?raw';
+import etcd from '../assets/technology/etcd.svg?raw';
+import certmanager from '../assets/technology/certmanager.svg?raw';
+import cloudnativepg from '../assets/technology/cloudnativepg.svg?raw';
+import k0s from '../assets/technology/k0s.svg?raw';
+import helm from '../assets/technology/helm.svg?raw';
+import ubuntu from '../assets/technology/ubuntu.svg?raw';
+import oracle from '../assets/technology/oracle.svg?raw';
 const { article = false } = Astro.props;
-const icons = [node, typescript, docker, postgres, redis, k6, envoy, istio, kubernetes];
+const infrastructure = Astro.url.pathname.replace(/\/$/, '').endsWith('/posts/oracle-a1-k3s-gitops');
+const icons = infrastructure
+  ? [k3s, argo, ansible, terraform, githubactions, prometheus, grafana, etcd, certmanager, cloudnativepg, k0s, helm, ubuntu, oracle]
+  : [node, typescript, docker, postgres, redis, k6, envoy, istio, kubernetes];
 ---
-<div class:list={['technology-backdrop', { 'reading-backdrop': article }]} aria-hidden="true">
+<div class:list={['technology-backdrop', { 'reading-backdrop': article, 'infrastructure-backdrop': infrastructure }]} aria-hidden="true">
   {icons.map((icon, index) => <span class={`technology-mark mark-${index}`} set:html={icon} />)}
 </div>
 <style>
@@ -55,6 +72,33 @@ const icons = [node, typescript, docker, postgres, redis, k6, envoy, istio, kube
     .mark-7 { top: 36%; right: -22px; }
     .mark-0,.mark-1,.mark-3,.mark-4,.mark-5,.mark-8 { display: none; }
     .reading-backdrop .technology-mark { opacity: .03; }
+  }
+
+  .infrastructure-backdrop .technology-mark { width: clamp(54px, 5vw, 72px); }
+  .infrastructure-backdrop .mark-0 { left: auto; right: auto; left: calc(50% - 555px); top: 7%; }
+  .infrastructure-backdrop .mark-1 { left: auto; right: auto; right: calc(50% - 555px); top: 7%; }
+  .infrastructure-backdrop .mark-2 { left: auto; right: auto; left: calc(50% - 555px); top: 20%; }
+  .infrastructure-backdrop .mark-3 { left: auto; right: auto; right: calc(50% - 555px); top: 20%; }
+  .infrastructure-backdrop .mark-4 { left: auto; right: auto; left: calc(50% - 555px); top: 33%; }
+  .infrastructure-backdrop .mark-5 { left: auto; right: auto; right: calc(50% - 555px); top: 33%; }
+  .infrastructure-backdrop .mark-6 { left: auto; right: auto; left: calc(50% - 555px); top: 46%; }
+  .infrastructure-backdrop .mark-7 { left: auto; right: auto; right: calc(50% - 555px); top: 46%; }
+  .infrastructure-backdrop .mark-8 { left: auto; right: auto; left: calc(50% - 555px); top: 59%; }
+  .infrastructure-backdrop .mark-9 { left: auto; right: auto; right: calc(50% - 555px); top: 59%; }
+  .infrastructure-backdrop .mark-10 { left: auto; right: auto; left: calc(50% - 555px); top: 72%; }
+  .infrastructure-backdrop .mark-11 { left: auto; right: auto; right: calc(50% - 555px); top: 72%; }
+  .infrastructure-backdrop .mark-12 { left: auto; right: auto; left: calc(50% - 555px); top: 85%; }
+  .infrastructure-backdrop .mark-13 { left: auto; right: auto; right: calc(50% - 555px); top: 85%; }
+  @media (max-width: 1100px) {
+    .infrastructure-backdrop .technology-mark:nth-child(odd) { left: -18px; right: auto; }
+    .infrastructure-backdrop .technology-mark:nth-child(even) { right: -18px; left: auto; }
+    .infrastructure-backdrop .technology-mark:nth-child(n+9) { display: none; }
+  }
+  @media (max-width: 600px) {
+    .infrastructure-backdrop .technology-mark { display: none; }
+    .infrastructure-backdrop .mark-0 { display: block; top: 12%; }
+    .infrastructure-backdrop .mark-1 { display: block; top: 38%; }
+    .infrastructure-backdrop .mark-5 { display: block; top: 72%; }
   }
   @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
     .technology-backdrop { display: none; }

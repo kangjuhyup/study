@@ -33,6 +33,7 @@ function validateEntries(entries) {
       if (typeof entry[field] !== 'string' || !entry[field].trim()) throw new Error(`${entry.slug}: ${field}가 필요합니다.`);
     }
     if (typeof entry.draft !== 'boolean') throw new Error(`${entry.slug}: draft는 boolean이어야 합니다.`);
+    if (entry.showToc !== undefined && typeof entry.showToc !== 'boolean') throw new Error(`${entry.slug}: showToc는 boolean이어야 합니다.`);
     const date = entry.publishedAt;
     if (date !== null && (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date)) throw new Error(`${entry.slug}: 발행일은 유효한 YYYY-MM-DD 또는 null이어야 합니다.`);
     if (!entry.draft && !date) throw new Error(`${entry.slug}: 공개 글에는 발행일이 필요합니다.`);

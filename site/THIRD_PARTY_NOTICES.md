@@ -2,6 +2,16 @@
 
 Node.js, TypeScript, Docker, Redis, PostgreSQL, k6, Envoy Proxy, Istio and Kubernetes SVGs are copied without modification from [Simple Icons](https://github.com/simple-icons/simple-icons/tree/777807a262bb7384ff406fd4b35fdcd02e9514c3). These technologies appear in published study posts. The icons are decorative; they do not imply endorsement. Brand marks remain the property of their respective owners.
 
+## Infrastructure article additions
+
+The site retains the existing PostgreSQL, Redis, Istio and Kubernetes assets and adds these authentic SVGs for the infrastructure article. The background shows a responsive subset to keep the article readable.
+
+- Ansible, Argo, etcd, GitHub Actions, Grafana, Helm, K3s, Prometheus, Terraform and Ubuntu: unmodified SVGs from [Simple Icons at commit 777807a](https://github.com/simple-icons/simple-icons/tree/777807a262bb7384ff406fd4b35fdcd02e9514c3/icons), licensed under CC0 1.0 (full text below).
+- Oracle: unmodified [Simple Icons 11.0.0 SVG](https://github.com/simple-icons/simple-icons/blob/11.0.0/icons/oracle.svg), under the release's [CC0 1.0 license](https://github.com/simple-icons/simple-icons/blob/11.0.0/LICENSE.md).
+- cert-manager, CloudNativePG and k0s: unmodified black icon SVGs from [CNCF artwork at commit 0026624](https://github.com/cncf/artwork/tree/002662490acb2303c7301acc0256c00790e03e9f/projects), respectively `cert-manager/icon/black/cert-manager-icon-black.svg`, `cloudnativepg/icon/black/cloudnativepg-icon-black.svg` and `k0s/icon/black/k0s-logo-2025-icon-black..svg`. These assets are subject to the [CNCF artwork license and trademark policy](https://github.com/cncf/artwork/blob/002662490acb2303c7301acc0256c00790e03e9f/LICENSE.md) and [Linux Foundation trademark usage guidelines](https://www.linuxfoundation.org/trademark-usage); they are not covered by the Simple Icons CC0 license.
+
+Doppler is covered in the article but omitted from the backdrop: a redistributable SVG with clear applicable license was not established during publication preparation. Alertmanager is represented by the Prometheus project mark; GHCR by GitHub Actions' delivery context, without inventing separate product marks.
+
 ## Simple Icons license
 
 # CC0 1.0 Universal

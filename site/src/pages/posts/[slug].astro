@@ -16,7 +16,7 @@ const { post } = Astro.props;
       <h1>{post.title}</h1>
       <p class="article-meta"><span>{site.author}</span>{post.publishedAt && <time datetime={post.publishedAt}>{post.publishedAt}</time>}</p>
     </header>
-    {post.headings.length > 0 && <nav class="toc" aria-label="목차">
+    {post.showToc !== false && post.headings.length > 0 && <nav class="toc" aria-label="목차">
       <h2>이 글에서</h2>
       <ol>{post.headings.filter(heading => heading.level === 2).map(heading => <li><a href={`#${heading.id}`}>{heading.text}</a></li>)}</ol>
     </nav>}
