@@ -1,6 +1,7 @@
 ---
 import { isPreview, site } from '../lib/settings.mjs';
 
+const { resumeEntry = false } = Astro.props;
 const measurementId = (import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '').trim();
 const enabled = import.meta.env.PROD && !isPreview() && measurementId !== '';
 if (enabled && !/^G-[A-Z0-9]+$/.test(measurementId)) {
@@ -9,13 +10,18 @@ if (enabled && !/^G-[A-Z0-9]+$/.test(measurementId)) {
 const { origin, base } = site;
 ---
 {enabled && (
-  <script define:vars={{ measurementId, origin, base }}>
+  <script define:vars={{ measurementId, origin, base, resumeEntry }}>
     // 공개 빌드를 localhost나 다른 호스트에서 검토해도 수집하지 않습니다.
     if (window.location.origin === origin && window.location.pathname.startsWith(base)) {
       window.dataLayer = window.dataLayer || [];
       window.gtag = function () { window.dataLayer.push(arguments); };
       window.gtag('js', new Date());
-      window.gtag('config', measurementId);
+      const campaign = resumeEntry ? {
+        campaign_source: 'resume',
+        campaign_medium: 'referral',
+        campaign_name: 'portfolio',
+      } : {};
+      window.gtag('config', measurementId, campaign);
 
       const tag = document.createElement('script');
       tag.async = true;

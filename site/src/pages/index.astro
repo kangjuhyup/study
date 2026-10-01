@@ -4,8 +4,9 @@ import GlassRefraction from '../components/GlassRefraction.astro';
 import { loadBlog } from '../lib/blog.mjs';
 import { site } from '../lib/settings.mjs';
 const { posts } = await loadBlog();
+const { resumeEntry = false } = Astro.props;
 ---
-<Page>
+<Page {resumeEntry}>
   <GlassRefraction />
   <section class="intro">
     <p class="eyebrow">LEARNING NOTES</p>

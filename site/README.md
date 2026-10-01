@@ -156,6 +156,12 @@ GA4의 **보고서 → 참여도 → 페이지 및 화면**에서 기간을 선�
 
 GA4에서 세션 소스/매체와 세션 캠페인으로 비교합니다. UTM은 공유한 링크의 표식이므로 링크를 다른 곳에 재공유해도 원래 지정한 출처로 기록될 수 있습니다. 블로그 내부 링크, sitemap과 canonical에는 UTM을 붙이지 않습니다. [Google GA4 UTM 안내](https://support.google.com/analytics/answer/11242870?hl=ko)
 
+### 이력서에 넣을 링크
+
+이력서에는 `https://blog.rvkang.app/cv/`를 사용합니다. 블로그 홈과 같은 화면을 제공하며, URL에 UTM을 붙이지 않고 Google 태그의 `campaign_source: resume`, `campaign_medium: referral`, `campaign_name: portfolio`를 설정합니다. GA4의 세션 소스/매체에서 이력서용 링크 유입을 구분할 수 있습니다. 검색 결과에 이 경로가 노출되지 않도록 `noindex, follow`를 설정하고 사이트맵에서 제외하며, canonical은 홈 주소를 유지합니다. 일반 홈·소개·글 페이지의 출처는 덮어쓰지 않습니다. [Google 캠페인 설정 문서](https://developers.google.com/analytics/devguides/collection/ga4/reference/config#campaign_source)
+
+이 경로는 개인별 식별자가 아닌 링크의 출처를 표시합니다. 다른 곳에 재공유하면 이력서용 링크 유입으로 기록될 수 있으며, 기존 세션 도중 유입된 클릭은 세션의 최초 출처와 다르게 표시될 수 있습니다. JavaScript나 Google 태그를 차단한 방문은 집계되지 않습니다.
+
 ## GitHub 이슈 댓글
 
 공개 글 하단에 [utterances](https://utteranc.es/)를 표시합니다. `kangjuhyup/study`의 Issues에 도메인 이전 전의 `/study/posts/글-slug/`를 고정 `issue-term`으로 사용하므로 도메인과 제목 수정은 댓글 연결에 영향을 주지 않습니다. 기존 글의 slug는 유지하세요.

@@ -5,7 +5,7 @@ import TechnologyBackdrop from '../components/TechnologyBackdrop.astro';
 import Analytics from '../components/Analytics.astro';
 import Seo from '../components/Seo.astro';
 import githubAvatar from '../assets/github-avatar.png';
-const { title = site.title, description = site.description, path = pagePath(), article = false, publishedAt, images = [] } = Astro.props;
+const { title = site.title, description = site.description, path = pagePath(), article = false, publishedAt, images = [], resumeEntry = false } = Astro.props;
 const preview = isPreview();
 const aboutPath = pagePath('about/');
 ---
@@ -15,8 +15,8 @@ const aboutPath = pagePath('about/');
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href={githubAvatar.src} />
-    <Seo {title} {description} {path} {publishedAt} {images} />
-    <Analytics />
+    <Seo {title} {description} {path} {publishedAt} {images} excludeFromSearch={resumeEntry} />
+    <Analytics {resumeEntry} />
   </head>
   <body>
     <TechnologyBackdrop article={article} />

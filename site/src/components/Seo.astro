@@ -2,7 +2,7 @@
 import { site, pagePath, absoluteURL, isPreview } from '../lib/settings.mjs';
 import githubAvatar from '../assets/github-avatar.png';
 
-const { title = site.title, description = site.description, path = pagePath(), publishedAt, images = [] } = Astro.props;
+const { title = site.title, description = site.description, path = pagePath(), publishedAt, images = [], excludeFromSearch = false } = Astro.props;
 const preview = isPreview();
 const canonical = absoluteURL(path);
 const aboutURL = absoluteURL(pagePath('about/'));
@@ -43,7 +43,7 @@ const jsonLD = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <meta name="author" content={site.author} />
 {preview ? <meta name="robots" content="noindex, nofollow" /> : (
   <>
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={excludeFromSearch ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonical} />
     {verification && <meta name="google-site-verification" content={verification} />}
     <script type="application/ld+json" is:inline set:html={jsonLD} />

@@ -46,7 +46,7 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   assert.doesNotMatch(aboutPreview, /rel="canonical"/);
   assert.doesNotMatch(await readFile(join(project, 'dist-preview/sitemap.xml'), 'utf8'), /<loc>/);
   assert.match(await readFile(join(project, 'dist-preview/robots.txt'), 'utf8'), /Disallow: \//);
-  for (const page of ['index.html', 'about/index.html', 'posts/public-post/index.html', 'posts/private-post/index.html']) {
+  for (const page of ['index.html', 'cv/index.html', 'about/index.html', 'posts/public-post/index.html', 'posts/private-post/index.html']) {
     assert.doesNotMatch(await readFile(join(project, 'dist-preview', page), 'utf8'), /googletagmanager|G-STUDY12345/);
     assert.doesNotMatch(await readFile(join(project, 'dist-preview', page), 'utf8'), /application\/ld\+json|google-site-verification|article:published_time/);
   }
@@ -86,6 +86,7 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   assert.match(sitemap, /https:\/\/blog\.rvkang\.app\/posts\/public-post\//);
   assert.doesNotMatch(sitemap, /private-post/);
   assert.doesNotMatch(sitemap, /\/study\//);
+  assert.doesNotMatch(sitemap, /\/cv\//);
   const files = await readdir(out, { recursive: true });
   assert(!files.some(file => /heapsnapshot|analysis\.json|\.prerender|posts\.json|\.md$/.test(file)));
   assert.doesNotMatch(await readFile(join(out, 'index.html'), 'utf8'), /미공개 글|private-post/);
@@ -156,7 +157,7 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
 
   await t.test('GA4는 ID가 있는 공개 페이지에서만 한 번 설정하고 로컬 검토를 수집하지 않는다', async () => {
     await build(false, 'G-STUDY12345', 'test-verification-token');
-    for (const page of ['index.html', 'about/index.html', 'posts/public-post/index.html']) {
+    for (const page of ['index.html', 'cv/index.html', 'about/index.html', 'posts/public-post/index.html']) {
       const html = await readFile(join(out, page), 'utf8');
       assert.match(html, /name="google-site-verification" content="test-verification-token"/);
       const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)]
@@ -177,6 +178,18 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
       assert.equal(production.tags[0].src, 'https://www.googletagmanager.com/gtag/js?id=G-STUDY12345');
       assert.deepEqual(production.commands.map(command => command[0]), ['js', 'config']);
       assert.equal(production.commands[1][1], 'G-STUDY12345');
+      const campaign = JSON.parse(JSON.stringify(production.commands[1][2]));
+      if (page === 'cv/index.html') {
+        assert.deepEqual(campaign, {
+          campaign_source: 'resume', campaign_medium: 'referral', campaign_name: 'portfolio',
+        });
+        assert.match(html, /name="robots" content="noindex, follow"/);
+        assert.match(html, /rel="canonical" href="https:\/\/blog\.rvkang\.app\/"/);
+        assert.match(html, /href="\/posts\/public-post\/"/);
+        assert.doesNotMatch(html, /utm_source=|utm_medium=|utm_campaign=|PRIVATE_SENTINEL/);
+      } else {
+        assert.deepEqual(campaign, {});
+      }
       for (const [origin, pathname] of [
         ['http://localhost:4321', '/'],
         ['http://127.0.0.1:4321', '/'],
