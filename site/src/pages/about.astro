@@ -2,6 +2,18 @@
 import Page from '../layouts/Page.astro';
 import { pagePath } from '../lib/settings.mjs';
 import githubAvatar from '../assets/github-avatar.png';
+import doznLogo from '../assets/companies/dozn.svg';
+import carrieverseLogo from '../assets/companies/carrieverse.png';
+import defiOnMcwLogo from '../assets/companies/defi-on-mcw.jpg';
+import PackageDownloads from '../components/PackageDownloads.astro';
+import { getProjectDownloads } from '../lib/npm-downloads.mjs';
+
+const projectPackages = {
+  '@kangjuhyup/rvlog': ['@kangjuhyup/rvlog', '@kangjuhyup/rvlog-nest', '@kangjuhyup/rvlog-react', '@kangjuhyup/rvlog-email', '@kangjuhyup/rvlog-discord', '@kangjuhyup/rvlog-sentry', '@kangjuhyup/rvlog-slack', '@kangjuhyup/rvlog-webhook', '@kangjuhyup/rvlog-otel'],
+  '@rvkang/rv-workflow': ['@rvkang/rv-workflow'],
+  '@rvkang/batch-core': ['@rvkang/batch-core', '@rvkang/batch-nest', '@rvkang/batch-mariadb', '@rvkang/batch-cli', '@rvkang/batch-bullmq', '@rvkang/batch-inmemory', '@rvkang/batch-mysql', '@rvkang/batch-postgres'],
+};
+const downloads = Object.fromEntries(await Promise.all(Object.entries(projectPackages).map(async ([name, packages]) => [name, await getProjectDownloads(packages)])));
 ---
 <Page
   title="About Me"
@@ -31,16 +43,132 @@ import githubAvatar from '../assets/github-avatar.png';
       </div>
       <ol class="experience-list">
         <li>
-          <div class="career-title"><h3>더즌</h3><span>아보카도팀 · main: 백엔드 개발, sub: 프론트엔드 개발</span><span class="career-period"><time datetime="2023-08">2023.08</time> ~ 현재</span></div>
-          <p>TypeScript·Kotlin 기반 서비스를 개발하고 모노레포 전환, 공통 모듈 정리, 테스트 기준 수립을 진행했습니다. Kubernetes 오토스케일링과 관측 체계를 구축하고 OIDC 기반 멀티테넌트 인증 서버를 설계·구현했습니다. 운영용 어드민 기능은 Next.js와 NestJS로 개발했습니다.</p>
+          <span class="career-marker"><img src={doznLogo.src} width="51" height="21" alt="더즌 로고" decoding="async" /></span>
+          <div class="career-title">
+            <h3>더즌</h3>
+            <div class="career-meta"><span class="career-team">아보카도팀</span><span class="career-role">백엔드 개발 <span class="career-secondary">· 프론트엔드 개발 병행</span></span></div>
+            <span class="career-period"><time datetime="2023-08">2023.08</time> ~ 현재</span>
+          </div>
+          <div class="career-overview">
+          <ul class="career-stack" aria-label="더즌 기술 스택">
+            <li>TypeScript</li><li>Kotlin</li><li>NestJS</li><li>Next.js</li><li>Kubernetes</li><li>OIDC</li>
+          </ul>
+          <details class="career-details">
+            <summary aria-label="더즌 상세 이력"><span class="details-show">펼치기</span><span class="details-hide">접기</span><svg class="details-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+            <div class="career-detail-content">
+              <div class="career-detail-group">
+                <h4>백엔드 기술 리드 · 개발 표준</h4>
+                <ul class="career-highlights">
+                  <li>모노레포 전환, Kafka·Storage·Redis·Database·인증 공통 모듈화</li>
+                  <li>Yarn PnP 도입과 의존성 정리로 빌드 시간 50% 단축</li>
+                  <li>테스트 가이드·코딩 컨벤션·Git 전략 수립. 기존 서비스 커버리지 0% → 30%, 신규 서비스 60% 이상 확보</li>
+                </ul>
+              </div>
+              <div class="career-detail-group">
+                <h4>아보카도 서비스 백엔드</h4>
+                <ul class="career-highlights">
+                  <li>Kotlin·Spring Boot 기반 부동산 실거래가·이웃 간 대여 서비스 개발</li>
+                  <li>TypeScript·NestJS 기반 전자투표 재개발, 입주민 커뮤니티·소방시설 자가점검 서비스 개발</li>
+                  <li>GraphQL·Apollo Federation 유지보수, Kafka·SchemaRegistry 기반 비동기 처리, 쿼리·인덱스 튜닝 및 Bulk Insert 적용</li>
+                  <li>Python·Flask·Hugging Face 기반 이미지 NSFW 검사 및 문장 요약 모델 도입</li>
+                </ul>
+              </div>
+              <div class="career-detail-group">
+                <h4>인프라 운영 · 모니터링</h4>
+                <ul class="career-highlights">
+                  <li>Kubernetes HPA 설계·운영, CPU·메모리·P95 Latency 기반 확장 정책 및 부하 테스트 튜닝</li>
+                  <li>Prometheus·Grafana 메트릭 대시보드, Loki 중앙 로그 수집 및 Trace ID 기반 요청 추적</li>
+                  <li>AlertManager·Slack Webhook 기반 오류·지연·Pod 장애 알림 자동화</li>
+                </ul>
+              </div>
+              <div class="career-detail-group">
+                <h4>OIDC 멀티테넌트 인증 서버</h4>
+                <ul class="career-highlights">
+                  <li>Tenant별 Client·Scope·Redirect URI 분리 및 JWT(RS256) 토큰 발급 구현</li>
+                  <li>Authorization Code·Refresh Token 흐름, 토큰 Rotation·Revocation 설계 및 Redis 세션·토큰 캐싱</li>
+                </ul>
+              </div>
+              <div class="career-detail-group">
+                <h4>운영 어드민</h4>
+                <ul class="career-highlights">
+                  <li>Next.js·Mantine 프론트엔드와 NestJS 백엔드 개발, Keycloak·2단계 인증 적용</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+          </div>
         </li>
         <li>
-          <div class="career-title"><h3>캐리버스</h3><span>웹3개발실 · 블록체인 서비스 개발 및 연구</span><span class="career-period"><time datetime="2022-08">2022.08</time> ~ <time datetime="2023-08">2023.08</time></span></div>
-          <p>브라우저 지갑 확장에서 블록체인 노드와의 JSON-RPC 통신, 웹페이지와 확장 프로그램 사이의 연결을 구현했습니다. zkRollup 기술을 연구하고 MVP를 개발했습니다.</p>
+          <span class="career-marker"><img src={carrieverseLogo.src} width={carrieverseLogo.width} height={carrieverseLogo.height} alt="캐리버스 공식 문서 아이콘" decoding="async" /></span>
+          <div class="career-title">
+            <h3>캐리버스</h3>
+            <div class="career-meta"><span class="career-team">웹3개발실</span><span class="career-role">블록체인 서비스 개발 및 연구</span></div>
+            <span class="career-period"><time datetime="2022-08">2022.08</time> ~ <time datetime="2023-08">2023.08</time></span>
+          </div>
+          <div class="career-overview">
+          <ul class="career-stack" aria-label="캐리버스 기술 스택">
+            <li>TypeScript</li><li>JSON-RPC</li><li>zkRollup</li><li>브라우저 확장</li>
+          </ul>
+          <details class="career-details">
+            <summary aria-label="캐리버스 상세 이력"><span class="details-show">펼치기</span><span class="details-hide">접기</span><svg class="details-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+            <div class="career-detail-content">
+              <div class="career-detail-group">
+                <h4>Cling Wallet Extension</h4>
+                <ul class="career-highlights">
+                  <li>TypeScript·React 기반 지갑 확장 프로그램 개발, eth.js를 통한 멀티 네트워크 JSON-RPC 통신</li>
+                  <li>EIP-1193 Injected Provider 구현 및 Service Worker 메시지를 통한 DApp·확장 프로그램 연결</li>
+                </ul>
+              </div>
+              <div class="career-detail-group">
+                <h4>블록체인 기술 R&amp;D</h4>
+                <ul class="career-highlights">
+                  <li>사내 테스트넷 노드 운영, zkRollup 연구 및 MVP 개발</li>
+                  <li>Circom 기반 zk-SNARK 산술 회로 정의, Vault·Block MerkleTree SmartContract 작성</li>
+                  <li>ImmutableX Core SDK의 Dart 포팅</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+          </div>
         </li>
         <li>
-          <div class="career-title"><h3>크립토</h3><span>개발팀 · 앱·웹·블록체인 개발</span><span class="career-period"><time datetime="2018-09">2018.09</time> ~ <time datetime="2022-06">2022.06</time></span></div>
-          <p>Android 암호화폐 지갑, 토큰 브리지, 결제 서비스의 스마트 계약과 API를 개발했습니다. 모바일 앱부터 웹 화면, 블록체인 모니터링 서버까지 여러 경계를 연결했습니다.</p>
+          <span class="career-marker" title="DeFi on MCW 서비스 로고"><img src={defiOnMcwLogo.src} width={defiOnMcwLogo.width} height={defiOnMcwLogo.height} alt="DeFi on MCW 서비스 로고" decoding="async" /></span>
+          <div class="career-title">
+            <div class="company-name"><h3>크립토</h3><small>DeFi on MCW 서비스 로고</small></div>
+            <div class="career-meta"><span class="career-team">개발팀</span><span class="career-role">앱·웹·블록체인 개발</span></div>
+            <span class="career-period"><time datetime="2018-09">2018.09</time> ~ <time datetime="2022-06">2022.06</time></span>
+          </div>
+          <div class="career-overview">
+          <ul class="career-stack" aria-label="크립토 기술 스택">
+            <li>TypeScript</li><li>Android</li><li>SmartContract</li><li>API</li>
+          </ul>
+          <details class="career-details">
+            <summary aria-label="크립토 상세 이력"><span class="details-show">펼치기</span><span class="details-hide">접기</span><svg class="details-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+            <div class="career-detail-content">
+              <div class="career-detail-group">
+                <h4>MyColdWallet · Android 지갑</h4>
+                <ul class="career-highlights">
+                  <li>Java·Android Studio 기반 SmartContract 지갑 앱 개발</li>
+                  <li>web3j 기반 Ethereum JSON-RPC 통신 및 JNI Native Module 연동</li>
+                </ul>
+              </div>
+              <div class="career-detail-group">
+                <h4>ERC20 Token Bridge</h4>
+                <ul class="career-highlights">
+                  <li>Ethereum·BSC·Klaytn 토큰 브리지 SmartContract 개발·배포, ABI 기반 이벤트 감지 및 로그 수집</li>
+                  <li>React SPA 개발, WalletConnect·web3.js 기반 모바일 지갑·확장 프로그램 연결</li>
+                </ul>
+              </div>
+              <div class="career-detail-group">
+                <h4>UsePay · 암호화폐 결제</h4>
+                <ul class="career-highlights">
+                  <li>Hardhat 기반 결제 SmartContract 개발·테스트·배포 및 Proxy Pattern 업그레이드 적용</li>
+                  <li>Python·Flask REST API와 블록체인 모니터링 서버 개발, Transaction·Event Log 분석 및 Reorg 방지 솔루션 적용</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+          </div>
         </li>
       </ol>
     </section>
@@ -64,18 +192,21 @@ import githubAvatar from '../assets/github-avatar.png';
           <span class="project-type">NPM PACKAGE</span>
           <strong>@kangjuhyup/rvlog</strong>
           <p>데코레이터, 필드 마스킹, 오류 알림을 지원하는 TypeScript 로깅 라이브러리</p>
+          <PackageDownloads stats={downloads['@kangjuhyup/rvlog']} />
           <span class="project-arrow" aria-hidden="true">↗</span>
         </a></li>
         <li><a href="https://www.npmjs.com/package/@rvkang/rv-workflow">
           <span class="project-type">NPM PACKAGE</span>
           <strong>@rvkang/rv-workflow</strong>
           <p>역할별 Codex 작업 절차와 도구 버전 확인, 진행 상황 표시를 묶은 프로젝트 워크플로</p>
+          <PackageDownloads stats={downloads['@rvkang/rv-workflow']} />
           <span class="project-arrow" aria-hidden="true">↗</span>
         </a></li>
         <li><a href="https://www.npmjs.com/package/@rvkang/batch-core">
           <span class="project-type">NPM PACKAGE</span>
           <strong>@rvkang/batch-core</strong>
           <p>nest-batch의 공통 계약과 도우미를 분리한 프레임워크 독립 패키지</p>
+          <PackageDownloads stats={downloads['@rvkang/batch-core']} />
           <span class="project-arrow" aria-hidden="true">↗</span>
         </a></li>
         <li><a href="https://kangjuhyup.github.io/auth/">
@@ -92,7 +223,7 @@ import githubAvatar from '../assets/github-avatar.png';
         <span class="section-number" aria-hidden="true">04</span>
         <h2 id="connect-heading">더 보기와 연락</h2>
       </div>
-      <p>이메일이나 전화로 연락할 수 있습니다. 코드와 공개 활동은 GitHub에서, 이전 글은 Medium에서 볼 수 있습니다.</p>
+      <p>이메일이나 전화로 연락할 수 있습니다. 코드와 공개 활동은 GitHub에서 볼 수 있습니다.</p>
       <address class="contact-list">
         <a href="mailto:fog0510@gmail.com"><span>이메일</span><strong>fog0510@gmail.com</strong></a>
         <a href="tel:+821043485571"><span>전화</span><strong>010-4348-5571</strong></a>
@@ -100,7 +231,6 @@ import githubAvatar from '../assets/github-avatar.png';
       <div class="about-actions">
         <a class="primary-action" href={pagePath()}>학습 기록 보기 <span aria-hidden="true">→</span></a>
         <a class="secondary-action" href="https://github.com/kangjuhyup">GitHub 프로필 <span aria-hidden="true">↗</span></a>
-        <a class="secondary-action" href="https://medium.com/@fog0510">Medium 글 <span aria-hidden="true">↗</span></a>
       </div>
     </section>
   </article>
@@ -132,15 +262,34 @@ import githubAvatar from '../assets/github-avatar.png';
   h2 { margin: 0; font-size: 24px; line-height: 1.4; letter-spacing: -.04em; }
   .about-section p { max-width: 680px; margin: 0 0 14px; color: var(--muted); font-size: 16px; line-height: 1.9; word-break: keep-all; }
   .about-section p:last-child { margin-bottom: 0; }
-  .experience-list { display: grid; gap: 20px; list-style: none; margin: 0; padding: 0 0 0 38px; }
-  .experience-list li { position: relative; padding: 22px 24px; border: 1px solid #e4ebf2; border-radius: 16px; background: #f4f8fc; }
-  .experience-list li::before { content: ''; position: absolute; left: -38px; top: 25px; width: 18px; height: 18px; border: 4px solid var(--accent); border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px #e6f0fa; }
-  .experience-list li:not(:last-child)::after { content: ''; position: absolute; left: -30px; top: 43px; bottom: -45px; width: 2px; background: #9ebce0; }
+  .experience-list { --timeline-axis: -27px; --timeline-dot-top: 19px; --timeline-dot-size: 38px; --timeline-gap: 20px; display: grid; gap: var(--timeline-gap); list-style: none; margin: 0; padding: 0 0 0 48px; }
+  .experience-list > li { position: relative; min-width: 0; padding: 22px 24px; border: 1px solid #e4ebf2; border-radius: 16px; background: #f4f8fc; }
+  .career-marker { position: absolute; display: flex; align-items: center; justify-content: center; left: var(--timeline-axis); transform: translateX(-50%); top: var(--timeline-dot-top); width: var(--timeline-dot-size); height: var(--timeline-dot-size); padding: 4px; border: 1px solid #dce7f3; border-radius: 10px; background: #fff; box-shadow: 0 0 0 3px #e6f0fa; }
+  .career-marker img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .experience-list > li:not(:last-child)::after { content: ''; position: absolute; left: var(--timeline-axis); transform: translateX(-50%); top: calc(var(--timeline-dot-top) + var(--timeline-dot-size)); bottom: calc(0px - var(--timeline-gap) - var(--timeline-dot-top) - 2px); width: 2px; background: #9ebce0; }
   .career-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 10px; }
   .experience-list h3 { margin: 0; font-size: 18px; letter-spacing: -.025em; }
-  .career-title span { color: var(--accent); font-size: 13px; font-weight: 700; }
+  .company-name small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.5; }
+  .career-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+  .career-team { padding: 3px 8px; border: 1px solid #dce5ef; border-radius: 6px; background: #eaf0f6; color: var(--muted); font-size: 12px; font-weight: 500; line-height: 1.5; white-space: nowrap; }
+  .career-role { color: var(--accent); font-size: 13px; font-weight: 650; line-height: 1.6; }
+  .career-secondary { color: var(--muted); font-weight: 400; }
   .career-title .career-period { margin-left: auto; color: var(--muted); font: 12px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: nowrap; }
-  .experience-list p { margin: 0; font-size: 15px; }
+  .career-overview { position: relative; margin-top: 16px; }
+  .career-stack { display: flex; flex-wrap: wrap; align-content: center; gap: 7px; min-height: 44px; margin: 0; padding: 0 88px 0 0; list-style: none; }
+  .career-stack li { padding: 5px 10px; border: 1px solid #dce5ef; border-radius: 7px; background: #fff; color: var(--ink); font-size: 12px; line-height: 1.5; }
+  .career-details summary { position: absolute; top: 0; right: 0; display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 76px; min-height: 44px; padding: 0 8px; border: 1px solid #dce5ef; border-radius: 8px; background: #fff; color: var(--accent); font-size: 12px; font-weight: 600; line-height: 20px; cursor: pointer; list-style: none; }
+  .career-details summary::-webkit-details-marker { display: none; }
+  .career-details summary:hover { border-color: var(--accent); background: #eef5fc; }
+  .career-details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .details-hide, .career-details[open] .details-show { display: none; }
+  .career-details[open] .details-hide { display: inline; }
+  .details-chevron { display: block; flex: 0 0 14px; width: 14px; height: 14px; }
+  .career-details[open] .details-chevron { transform: rotate(180deg); }
+  .career-detail-content { display: grid; gap: 22px; margin-top: 16px; padding-top: 20px; border-top: 1px solid #dce5ef; }
+  .career-detail-group h4 { margin: 0 0 9px; color: var(--ink); font-size: 13px; line-height: 1.6; }
+  .career-highlights { display: grid; gap: 7px; margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+  .career-highlights li::marker { color: #9ebce0; }
   .project-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; }
   .project-list a { display: flex; flex-direction: column; min-height: 188px; padding: 22px 24px; border: 1px solid #e4ebf2; border-radius: 16px; background: #f4f8fc; text-decoration: none; }
   .project-list a:hover { border-color: var(--accent); background: #eef5fc; }
@@ -175,16 +324,20 @@ import githubAvatar from '../assets/github-avatar.png';
     .section-heading { gap: 12px; margin-bottom: 18px; }
     h2 { font-size: 21px; }
     .about-section p { font-size: 15px; }
-    .experience-list { gap: 12px; padding-left: 32px; }
-    .experience-list li { padding: 18px; }
-    .experience-list li::before { left: -32px; top: 22px; }
-    .experience-list li:not(:last-child)::after { left: -24px; top: 40px; bottom: -34px; }
+    .experience-list { --timeline-axis: -22px; --timeline-dot-top: 19px; --timeline-dot-size: 32px; --timeline-gap: 12px; padding-left: 40px; }
+    .experience-list > li { padding: 18px; }
     .career-title { align-items: flex-start; flex-direction: column; gap: 5px; }
+    .career-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
     .experience-list h3 { font-size: 16px; }
     .career-title .career-period { margin-left: 0; }
     .project-list { grid-template-columns: 1fr; }
     .project-list a { min-height: 0; padding: 18px; }
     .contact-list { grid-template-columns: 1fr; }
     .about-actions a { width: 100%; }
+  }
+  @media (max-width: 400px) {
+    .career-stack { padding-right: 56px; }
+    .career-details summary { width: 44px; padding: 0; gap: 0; }
+    .details-show, .details-hide { font-size: 0; }
   }
 </style>

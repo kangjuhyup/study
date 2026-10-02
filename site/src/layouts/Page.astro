@@ -8,6 +8,7 @@ import githubAvatar from '../assets/github-avatar.png';
 const { title = site.title, description = site.description, path = pagePath(), article = false, publishedAt, images = [], resumeEntry = false } = Astro.props;
 const preview = isPreview();
 const aboutPath = pagePath('about/');
+const isAboutPage = path === aboutPath;
 ---
 <!doctype html>
 <html lang="ko">
@@ -24,7 +25,7 @@ const aboutPath = pagePath('about/');
     <header class="site-header">
       <a class="wordmark" href={pagePath()} aria-label="Study 홈">Study<span aria-hidden="true">.</span></a>
       <nav class="site-nav" aria-label="주 메뉴">
-        <a class="about-link" href={aboutPath} aria-current={path === aboutPath ? 'page' : undefined}>About Me</a>
+        <a class="about-link" href={isAboutPage ? pagePath() : aboutPath}>{isAboutPage ? 'Study Notes' : 'About Me'}</a>
         <a class="author" href="https://github.com/kangjuhyup">{site.author} ↗</a>
       </nav>
     </header>

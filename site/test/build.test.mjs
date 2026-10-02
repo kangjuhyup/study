@@ -14,6 +14,19 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   t.after(() => rm(root, { recursive: true, force: true }));
   const project = join(root, 'site');
   await mkdir(project);
+  const npmMock = join(root, 'npm-api-mock.mjs');
+  await writeFile(npmMock, `
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (input, options) => {
+      const url = new URL(input);
+      if (!['registry.npmjs.org', 'api.npmjs.org'].includes(url.hostname)) return originalFetch(input, options);
+      const name = decodeURIComponent(url.pathname.split('/').at(-1));
+      if (name === '@rvkang/rv-workflow') return new Response('', { status: 503 });
+      if (url.hostname === 'registry.npmjs.org') return Response.json({ time: { created: '2026-09-05T00:00:00Z' } });
+      const daily = url.pathname.includes('/last-day/');
+      return Response.json({ package: name, downloads: daily ? 120 : 1250, start: daily ? '2026-09-29' : '2026-09-05', end: '2026-09-29' });
+    };
+  `);
   for (const path of ['src', 'astro.config.mjs', 'package.json']) await cp(resolve(path), join(project, path), { recursive: true });
   await symlink(resolve('node_modules'), join(project, 'node_modules'), 'dir');
   const image = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+j2ioAAAAASUVORK5CYII=', 'base64');
@@ -28,7 +41,7 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
     { slug: 'public-post', source: 'public.md', title: '공개 글', description: publicDescription, publishedAt: '2026-09-06', draft: false },
     { slug: 'private-post', source: 'private.md', title: '미공개 글', description: '비공개 요약', publishedAt: null, draft: true },
   ]));
-  const build = (preview, measurementId = '', verification = '') => exec(process.execPath, [resolve('node_modules/astro/bin/astro.mjs'), 'build'], {
+  const build = (preview, measurementId = '', verification = '') => exec(process.execPath, ['--import', npmMock, resolve('node_modules/astro/bin/astro.mjs'), 'build'], {
     cwd: project,
     env: { ...process.env, BLOG_PREVIEW: preview ? '1' : '0', PUBLIC_GA_MEASUREMENT_ID: measurementId, PUBLIC_GOOGLE_SITE_VERIFICATION: verification, ASTRO_TELEMETRY_DISABLED: '1' },
     timeout: 60_000,
@@ -91,9 +104,18 @@ test('배포 산출물은 공개 글만 포함하고, 미리보기와 원본 주
   assert(!files.some(file => /heapsnapshot|analysis\.json|\.prerender|posts\.json|\.md$/.test(file)));
   assert.doesNotMatch(await readFile(join(out, 'index.html'), 'utf8'), /미공개 글|private-post/);
   const about = await readFile(join(out, 'about/index.html'), 'utf8');
+  assert.equal((about.match(/class="package-downloads"/g) ?? []).length, 2);
+  assert.match(about, /누적 다운로드/);
+  assert.doesNotMatch(about, /최근 30일/);
+  assert.match(about, />11,250<\/dd>/);
+  assert.match(about, />10,000<\/dd>/);
+  assert.match(about, /9개 패키지 합산/);
+  assert.match(about, /8개 패키지 합산/);
+  assert.match(about, /datetime="2026-09-29"/);
+  assert.equal((about.match(/다운로드 통계를 일시적으로 조회할 수 없습니다\./g) ?? []).length, 1);
   assert.match(about, /rel="canonical" href="https:\/\/blog\.rvkang\.app\/about\/"/);
   assert.match(about, /<h3[^>]*>더즌<\/h3>/);
-  assert.match(about, /main: 백엔드 개발, sub: 프론트엔드 개발/);
+  assert.match(about, /프론트엔드 개발 병행/);
   assert.match(about, /<h3[^>]*>캐리버스<\/h3>/);
   assert.match(about, /<h3[^>]*>크립토<\/h3>/);
   assert.match(about, /<time datetime="2022-08"[^>]*>2022\.08<\/time> ~ <time datetime="2023-08"[^>]*>2023\.08<\/time>/);
