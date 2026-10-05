@@ -77,6 +77,18 @@ npm run preview:review
 
 `showToc`는 선택 항목입니다. `false`로 지정한 글은 자동 목차를 숨기며, 생략하면 기존처럼 표시합니다.
 
+### Mermaid 다이어그램
+
+Markdown의 `mermaid` 코드 블록을 다이어그램으로 표시합니다. Mermaid **12.0.0**을 npm 의존성으로 고정하고, 다이어그램이 있는 페이지에서 브라우저 렌더링 모듈을 불러옵니다. 원문은 코드로 관리하며 별도의 이미지 파일은 필요하지 않습니다. [Mermaid 사용 안내](https://mermaid.js.org/config/usage.html)
+
+```mermaid
+flowchart LR
+  Client[클라이언트] --> Gateway
+  Gateway --> Service[Subgraph]
+```
+
+가로형 다이어그램의 높이는 최대 240px이며, 좁은 화면에서는 글자 크기를 유지하도록 다이어그램 안에서 가로로 스크롤합니다. JavaScript가 비활성화되거나 렌더링이 실패하면 원문 코드가 남습니다. HTML과 클릭 기능은 `securityLevel: strict`로 제한합니다.
+
 공개된 글의 `slug`는 기존 링크를 유지하기 위해 변경하지 않습니다. 원문을 수정하면 다음 빌드에 반영됩니다. 등록한 글과 참조 이미지가 빌드 입력이며, 재현 코드 실행이나 스냅샷 재생성은 필요하지 않습니다. 누락 파일, workspace 밖 경로, 중복 slug와 공개 대상으로 해석할 수 없는 로컬 링크는 오류를 해결한 뒤 다시 빌드합니다.
 
 ## GitHub Pages 배포

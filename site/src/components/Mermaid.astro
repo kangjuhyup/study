@@ -1,0 +1,64 @@
+<script>
+  const diagrams = document.querySelectorAll<HTMLElement>('[data-mermaid]');
+  if (diagrams.length > 0) {
+    const { default: mermaid } = await import('mermaid');
+    await document.fonts.ready;
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      layout: 'dagre',
+      theme: 'base',
+      fontFamily: '"Apple SD Gothic Neo", "Noto Sans KR", sans-serif',
+      themeVariables: {
+        fontSize: '14px',
+        primaryColor: '#edf4ff',
+        primaryTextColor: '#172a42',
+        primaryBorderColor: '#719ade',
+        lineColor: '#52647b',
+        edgeLabelBackground: '#fbfdff',
+      },
+      flowchart: {
+        htmlLabels: false,
+        curve: 'linear',
+        nodeSpacing: 14,
+        rankSpacing: 22,
+        padding: 10,
+        useMaxWidth: true,
+      },
+    });
+    for (const [index, diagram] of [...diagrams].entries()) {
+      const source = diagram.textContent ?? '';
+      try {
+        const { svg } = await mermaid.render(`study-mermaid-${index}`, source);
+        diagram.innerHTML = svg;
+        diagram.dataset.rendered = 'true';
+      } catch (error) {
+        // Keep the readable source when a diagram cannot be rendered.
+        diagram.textContent = source;
+        console.error('Mermaid diagram could not be rendered', error);
+      }
+    }
+  }
+</script>
+
+<style is:global>
+  .prose pre.mermaid-diagram[data-rendered] {
+    padding: 14px;
+    background: #fbfdff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink);
+    font-family: inherit;
+    line-height: 1;
+    overflow-x: auto;
+    white-space: normal;
+  }
+  .prose .mermaid-diagram[data-rendered] svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    max-height: 240px;
+    height: auto;
+    margin: 0 auto;
+  }
+</style>

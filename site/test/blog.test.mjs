@@ -75,6 +75,28 @@ test('Code examples retain their original text without interpreting HTML or Mark
   assert.equal(images.size, 0);
 });
 
+test('Mermaid fences retain escaped source for rendering without enabling HTML', async t => {
+  const options = await fixture(t, [entry('diagram')], {
+    'diagram/index.md': '# Title diagram\n\n```mermaid\nflowchart LR\nA["<script>alert(1)</script>"] --> B\n```',
+  });
+  const { posts: [post], images } = await loadBlog(options);
+  assert.equal(post.hasMermaid, true);
+  assert.match(post.html, /<pre class="mermaid-diagram" data-mermaid>/);
+  assert.match(post.html, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+  assert.doesNotMatch(post.html, /<script\b/);
+  assert.equal(images.size, 0);
+});
+
+test('Ordinary code fences do not request Mermaid rendering', async t => {
+  const options = await fixture(t, [entry('ordinary')], {
+    'ordinary/index.md': '# Title ordinary\n\n```text\nflowchart LR\nA --> B\n```',
+  });
+  const { posts: [post] } = await loadBlog(options);
+  assert.equal(post.hasMermaid, false);
+  assert.doesNotMatch(post.html, /data-mermaid/);
+  assert.match(post.html, /class="language-text"/);
+});
+
 test('Local images use the custom domain root and preserve source bytes', async t => {
   const bytes = Buffer.from([137, 80, 78, 71, 0, 255, 13, 10]);
   const options = await fixture(t, [entry('image')], {

@@ -1,0 +1,23 @@
+
+> test
+> node --test test/*.test.mjs
+
+Enabling inline tracing for this subgraph. To disable, use ApolloServerPluginInlineTraceDisabled.
+Enabling inline tracing for this subgraph. To disable, use ApolloServerPluginInlineTraceDisabled.
+Enabling inline tracing for this subgraph. To disable, use ApolloServerPluginInlineTraceDisabled.
+✔ me with only profile does not call inventory or products (72.234917ms)
+✔ me can traverse User inventory and its Product entities across three subgraphs (14.101291ms)
+✔ omitting products from inventory avoids the Products subgraph (5.796625ms)
+✔ products-only query does not call inventory (3.792209ms)
+✔ gateway joins entities and passes unselected @requires inputs (6.035167ms)
+✔ reference resolver resolves known keys and returns null for missing entities (1.297875ms)
+✔ an unknown product stays null without an inventory lookup (4.04225ms)
+✔ composition rejects two non-shareable resolvers for the same field (2.960375ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5808.418292

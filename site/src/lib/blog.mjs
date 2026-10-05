@@ -65,7 +65,14 @@ export async function loadBlog({ workspaceRoot = defaultWorkspace, manifestPath 
     const source = paths.get(entry.slug);
     const markdown = await readFile(source, 'utf8');
     const md = new MarkdownIt({ html: false, linkify: true });
+    const renderFence = md.renderer.rules.fence;
+    md.renderer.rules.fence = (tokens, index, options, env, renderer) => {
+      const token = tokens[index];
+      if (token.info.trim() !== 'mermaid') return renderFence(tokens, index, options, env, renderer);
+      return `<pre class="mermaid-diagram" data-mermaid>${md.utils.escapeHtml(token.content)}</pre>\n`;
+    };
     const tokens = md.parse(markdown, {});
+    const hasMermaid = tokens.some(token => token.type === 'fence' && token.info.trim() === 'mermaid');
     if (tokens[0]?.type !== 'heading_open' || tokens[0].tag !== 'h1' || headingText(tokens[1]) !== entry.title) throw new Error(`${entry.source}: 첫 제목은 등록한 title과 같아야 합니다.`);
     tokens.splice(0, 3);
     const headings = [];
@@ -98,7 +105,8 @@ export async function loadBlog({ workspaceRoot = defaultWorkspace, manifestPath 
             const hash = createHash('sha256').update(bytes).digest('hex');
             const asset = `${hash}${extension}`;
             images.set(asset, { bytes, contentType: imageTypes[extension] });
-            token.attrSet('src', pagePath(`media/${asset}`));
+            // The dev router enforces trailingSlash; static endpoints export image files.
+            token.attrSet('src', pagePath(`media/${asset}${import.meta.env?.DEV ? '/' : ''}`));
           }
           token.attrSet('loading', 'lazy');
           token.attrSet('decoding', 'async');
@@ -120,7 +128,7 @@ export async function loadBlog({ workspaceRoot = defaultWorkspace, manifestPath 
       }
     }
     await visit(tokens);
-    posts.push({ ...entry, path: pagePath(`posts/${entry.slug}/`), html: md.renderer.render(tokens, md.options, {}), headings, images: postImages });
+    posts.push({ ...entry, path: pagePath(`posts/${entry.slug}/`), html: md.renderer.render(tokens, md.options, {}), headings, images: postImages, hasMermaid });
   }
   posts.sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '') || a.slug.localeCompare(b.slug));
   return { posts, images, preview };

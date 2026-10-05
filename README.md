@@ -12,6 +12,7 @@
 | [scoped-superpowers-ab](./scoped-superpowers-ab/README.md) | Superpowers와 개인 workflow의 토큰·시간 비교: 코드 감사 및 코드 변경 벤치마크 |
 | [local-production-auth-boundary](./local-production-auth-boundary/README.md) | 로컬 인증 흐름과 Envoy·Istio 외부 인가 제안의 신뢰 경계 비교 |
 | [k3s-gitops](./k3s-gitops/README.md) | Oracle A1의 K3s 초기화·재구축, GitOps 배포와 단일 노드 운영 기록 |
+| [graphql-federation](./graphql-federation/README.md) | Profile·Inventory·Products Subgraph 연결, 필드 선택에 따른 호출 변화와 Apollo Federation 트레이드오프 |
 
 ## 기록 방식
 

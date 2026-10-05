@@ -47,5 +47,13 @@
     "publishedAt": "2026-10-01",
     "draft": false,
     "showToc": false
+  },
+  {
+    "slug": "graphql-federation",
+    "source": "graphql-federation/blog/index.md",
+    "title": "BFF와 마이크로서비스를 연결하는 GraphQL Federation: Apollo의 역할과 트레이드오프",
+    "description": "내 프로필에서 Inventory와 Products까지 Subgraph를 연결하고, 필요한 필드만 선택했을 때의 호출 변화를 확인합니다. BFF와 Apollo의 역할·트레이드오프도 정리합니다.",
+    "publishedAt": null,
+    "draft": true
   }
 ]

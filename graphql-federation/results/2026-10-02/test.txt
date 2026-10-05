@@ -1,0 +1,19 @@
+
+> test
+> node --test test/*.test.mjs
+
+Enabling inline tracing for this subgraph. To disable, use ApolloServerPluginInlineTraceDisabled.
+Enabling inline tracing for this subgraph. To disable, use ApolloServerPluginInlineTraceDisabled.
+✔ products-only query does not call inventory (58.532333ms)
+✔ gateway joins entities and passes unselected @requires inputs (7.329792ms)
+✔ reference resolver resolves known keys and returns null for missing entities (1.419708ms)
+✔ an unknown product stays null without an inventory lookup (4.6555ms)
+✔ composition rejects two non-shareable resolvers for the same field (3.026042ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5666.707292
